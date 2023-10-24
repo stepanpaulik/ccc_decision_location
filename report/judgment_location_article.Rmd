@@ -2,18 +2,19 @@
 output: 
   stevetemplates::article2:
     keep_tex: true
-title: "CYBERSPACE Abstract: Locating Czech Constitutional Court Decisions in Doctrine Space and Measuring its Caselaw Consistency"
+biblio-style: apsr
+title: "Locating Czech Constitutional Court Decisions in Doctrine Space and Measuring its Caselaw Consistency"
 author:
 - name: Štěpán Paulík
   affiliation: Humboldt Universität zu Berlin, Institut für Sozialwissenschaften, stepan.paulik.1@hu-berlin.de
 - name: Jaromír Fronc
   affiliation: Charles University, Faculty of Law, jaromir.fronc@gmail.com
 abstract: "Our research explores the estimation of positions of Czech Constitutional Court decisions in a doctrine space using Bayesian statistical model. Traditional methods of estimating ideological positions suffer from limitations, prompting the adoption of new text-as-data approaches empowered by advances in computational technology and statistics. Two research teams have attempted to overcome previous constraints and estimate judicial positions more accurately, one in the SCOTUS context and one in the German lower courts context. Our study implements the method of Clark and Lauderdale of estimating the locations of SCOTUS decisions with positive or negative references to its caselaw: the closer decisions are to each other, the more likely they are to cite themselves positively and vice-versa. We combine our own dataset of all CCC decisions with the data on citations provided to us by Beck. We use the programming language R and the Bayesian engine Stan to estimate the positions employing the Bayesian model of Clark and Lauderdal. Estimating the positions allows us to examine the consistency of the CC's case law across different senates and the plenum. We narrow our analysis to areas of law in common doctrine space that are prone to inconsistency, namely restitution cases and costs of civil proceedings. The research contributes to harnessing the potential of machine learning and quantitative methods in legal research and clarifies the factors influencing caselaw consistency."
+keywords: "empirical legal research, courts, dissents, judicial behavior, political science, Bayesian statistics, regression analysis"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 geometry: margin=1in
-#sansfont: Linux Biolinum O
 fontsize: 11pt
-# doublespacing: TRUE
+doublespacing: TRUE
 endnote: no
 # pandocparas: TRUE
 sansitup: FALSE
@@ -22,14 +23,25 @@ header-includes:
   - \LTcapwidth=.95\textwidth
   - \linespread{1.05}
   - \usepackage{hyperref}
-bibliography: "`r rbbt::bbt_write_bib('bibliography.bib', overwrite = TRUE)`"
----
+  - \usepackage{float}
+bibliography: "`r rbbt::bbt_write_bib('bibliography.bib', overwrite = TRUE)`""
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2); theme_set(theme_minimal())
+library(lemon)
+knit_print.tibble = lemon_print
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-\vspace{30pt}
+
+The question of to what extent is court case law consistent has been of interest of legal scholarship as well as legal practice for quite some time. While the question has been posed in the context development of caselaw over time, in the case of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, ECJ or typically national constitutional courts.
+
+While works about caselaw consistency are typical doctrinal, we study caselaw consistency empirically.
+
+# Method
+
+We believe the issue of caselaw consistency to boil down to two issues: firstly, the estimation of location of a case in a case-space and, secondly, to conceptualizing consistency of caselaw as a variation of thereof among different units of interest, court chambers in our context. 
 
 Especially American empirical legal science has long been trying to estimate the ideological position of judges or judicial decisions, especially in the context of SCOTUS (Supreme Court of the United States). Based on this estimation, the research seeks to answer subsequent sociological research questions. Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamicIdealPoint2002] scores are among the examples of attempts to quantify the ideological position of judges. However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
 
@@ -50,4 +62,7 @@ Regarding the method, we employ a mix of quantitative methods (Bayesian statisti
 
 Subsequently, we analyse the results in connection with our research question regarding the consistency of the Constitutional Court's case law. Specifically, we compare the distributions of decision positions within the given areas across the Court's senates and the plenum and across different periods of the Constitutional Court.
 
-\vspace{30pt}
+
+
+
+
