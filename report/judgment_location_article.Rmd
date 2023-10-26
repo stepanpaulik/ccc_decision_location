@@ -24,7 +24,8 @@ header-includes:
   - \linespread{1.05}
   - \usepackage{hyperref}
   - \usepackage{float}
-bibliography: "`r rbbt::bbt_write_bib('bibliography.bib', overwrite = TRUE)`""
+bibliography: "`r rbbt::bbt_write_bib('bibliography.bib', overwrite = TRUE)`"
+---
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -37,13 +38,13 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 The question of to what extent is court case law consistent has been of interest of legal scholarship as well as legal practice for quite some time. While the question has been posed in the context development of caselaw over time, in the case of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, ECJ or typically national constitutional courts.
 
-While works about caselaw consistency are typical doctrinal, we study caselaw consistency empirically.
+While works about caselaw consistency are typical doctrinal, presenting examples of mutually incompatible decisions, we study caselaw consistency empirically employing quantitative methods.
 
 # Method
+We believe the issue of caselaw consistency to boil down to two issues: firstly, the estimation of location of a case in a case-space and, secondly, to quantitatively conceptualizing consistency of caselaw. In both aspects, we build on previous work - on the empirical development of estimating location of a judicial decision in a common case-space [] and theoretical work into consistency law across court chambers [@fjelstulHowChamberSystem2021].
 
-We believe the issue of caselaw consistency to boil down to two issues: firstly, the estimation of location of a case in a case-space and, secondly, to conceptualizing consistency of caselaw as a variation of thereof among different units of interest, court chambers in our context. 
 
-Especially American empirical legal science has long been trying to estimate the ideological position of judges or judicial decisions, especially in the context of SCOTUS (Supreme Court of the United States). Based on this estimation, the research seeks to answer subsequent sociological research questions. Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamicIdealPoint2002] scores are among the examples of attempts to quantify the ideological position of judges. However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
+Traditionally mainly American empirical legal science has long tried to estimate a position of judges or judicial decisions, especially in the context of political ideology of SCOTUS (Supreme Court of the United States) decisions and judges. Based on this estimation, the research sought to answer subsequent sociological research questions. Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamicIdealPoint2002] scores are among the examples of attempts to quantify the ideological position of judges. However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
 
 Recent developments in information technology enable more precise and diverse work with data, specifically with text as data. This progress is starting to make its way into social and legal sciences. Two research teams have utilised the progress to overcome the aforementioned limitations in traditional estimation efforts of judicial decisions and judges' positions. Both teams operate on the premise that the "closer" judicial decisions or other legal documents are to each other, the greater the likelihood that they will refer to one another. They employ similar statistical models to estimate the position of a given decision based on this premise. Moreover, their methods share the use of Bayesian statistics, whose expansion has been facilitated by the development of computational techniques. Despite these similarities, there is a fundamental difference between the two research teams in determining which intertextual reference is relevant for identifying the mutual position of judicial decisions.
 
@@ -61,8 +62,3 @@ Regarding the method, we employ a mix of quantitative methods (Bayesian statisti
 "Stan’s MCMC techniques are based on Hamiltonian Monte Carlo, a more efficient and robust sampler than Gibbs sampling or Metropolis Hastings for models with complex posteriors." [@brooksHandbookMarkovChain2011]
 
 Subsequently, we analyse the results in connection with our research question regarding the consistency of the Constitutional Court's case law. Specifically, we compare the distributions of decision positions within the given areas across the Court's senates and the plenum and across different periods of the Constitutional Court.
-
-
-
-
-
