@@ -1,0 +1,18 @@
+var x.opinion[OpinionCount]
+	
+model { 
+
+for (i in 1:CitationCount){
+Z[i] ~ dbern(Zp[i])
+Zp[i] <- phi(kappa + lambda*pow(x.opinion[PrecedentID[i]] - x.opinion[NewCaseID[i]],2))
+}
+
+for (j in 1:OpinionCount){
+x.opinion[UniqueCaseIDs[j]] ~ dnorm(0,1)
+}
+
+kappa ~ dunif(-10,10)
+lambda ~ dunif(-10,0)
+}
+
+

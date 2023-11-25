@@ -1,0 +1,31 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+cases_discrimination|stem|1eaf528515925dac|66a65022303430cb|8aef8ce790ccef8b|-1569637179||t19675.3231405404s|3abd4734f8304f42|7724|rds|local|vector|||1.349||
+cases_restitution|stem|ddb9a5a7bbddc01e|3156be797bd1ec05|8aef8ce790ccef8b|-1424104387||t19675.3231248877s|a3de03838f81f08a|12248|rds|local|vector|||1.43||
+cite_data|stem|8dfc6db803416aaf|22102efb934e0519|42015253d991bd11|-872149181||t19667.4255555556s|7b9df3674dfc98f8|3427|rds|local|vector|||0.014||
+cite_data_discrimination|stem|5101d590b76b8e87|d05b1d7e61cf7131|cdf4c23285b62d47|727813640||t19675.3237500467s|8d0f655f7afde6e5|1800|rds|local|vector|||0.007||
+cite_data_restitution|stem|9c7f76d7e3d3ad3c|be5f73b012b4056b|4ab73f014316bf6a|975077034||t19675.3237499351s|b71f9670fd7594fd|3439|rds|local|vector|||0.004||
+CiteData|stem|8dfc6db803416aaf|22102efb934e0519|42015253d991bd11|1767731591||t19667.3842231613s|7b9df3674dfc98f8|3427|rds|local|vector|||0.014||
+data|stem|721d792403a45016|92c3a36f3560bdc3|4b5be0d8bdac1359|1588979285||t19666.7899305556s|20bbc50c42e97e83|11348|rds|local|vector|||2.299||
+data_discriminiation|stem|8912ad47f6594cab|a7fbe51222278ae5|9c7033a6a1138241|-41788062||t19675.3237498502s|d2553390b2f75306|4513|rds|local|vector|||2.167|1m22mDetected an unexpected manytomany relationship between x and y.36mℹ39m Row 21448 of x matches multiple rows in y.36mℹ39m Row 16 of y matches multiple rows in x.36mℹ39m If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. 1m22mDetected an unexpected manytomany relationship between x and y.36mℹ39m Row 57920 of x matches multiple rows in y.36mℹ39m Row 417 of y matches multiple rows in x.36mℹ39m If a manytomany relationship is expected, set relationship   manytomany to silence this warning.|
+data_restitution|stem|c2f0653159da77d8|fa941f36950a87ec|6f8ec25f12aa24b4|437669886||t19675.3237247264s|2ef56cc439eae369|11543|rds|local|vector|||2.153||
+data_subset|stem|9cba0ca80fcd9659|8b64361fe55ee890|29a7beb11348b6e0|1041076605||t19667.4224768519s|fc5a7f730a6956f4|12061|rds|local|vector|||1.476||
+final_data|stem|8d4f990b9da4799a|839b5667e6eab925|79169f1ab4c76f79|-683886975||t19667.6414269637s|a1cb003df9914e5a|10790|rds|local|vector|||241.61||
+finalise_data|function|b46a7a3ce991a943|||||||||||||||
+fit_model|function|c018930dda5a9659|||||||||||||||
+fitted_model_discrimination|stem|a81c277df2112a23|b1c2d62b9a3e25c4|53cea30ad40efedb|-2003667610||t19684.8152747462s|25bf6aaed7ba01e8|6550|rds|local|vector|||42.662||
+fitted_model_restitution|stem|93d1aa16478e0460|23c3965d58e97b41|46812614511f5987|-1214598973||t19684.8147809117s|2e4eeda1da614ffe|12253|rds|local|vector|||87.067||
+get_data|function|ed3e2cbe5c428cc8|||||||||||||||
+input|stem|1b315a95f34ccf83|29067090c4cdce4b|ef46db3751d8e999|-1276294782|data/US_Cituje.xlsx|t19656.5268614462s|774a1bee6af4aa6e|14710387|file|local|vector|||0||
+input_subset|stem|a10c70bde8d85444|881e4ded05103989|ef46db3751d8e999|-948604022|../data/US_metadata.rds|t19660.6149510023s|041acff40bcae311|77118612|file|local|vector|||0||
+load_data|function|ed3e2cbe5c428cc8|||||||||||||||
+metadata|stem|43270ac235bd879a|881e4ded05103989|ef46db3751d8e999|2062409165|../data/US_metadata.rds|t19675.2718737148s|f10348bd2c84724f|76614016|file|local|vector|||0||
+model|stem|ce5c4e5c761c4b12|8ccefe0b6e84d86d|611f1ec51fb773b2|1816327236||t19667.4265520416s|4140e78f4aacf71b|19152433|rds|local|vector|||85.237||
+model_specification|stem|45bff6a03e2fbde3|4d736e547ad5f50e|ef46db3751d8e999|-117516480|scripts/ModelUS.txt|t19530.3045102596s|efcd02b2c80eadaa|298|file|local|vector|||0||
+prepare_cite_data|function|5820348099223b7c|||||||||||||||
+prepare_CiteData|function|5820348099223b7c|||||||||||||||
+process_model|function|67824733aca8fec9|||||||||||||||
+report|stem|5d611cb10b14f6aa|bf0db249c40935d1|ef46db3751d8e999|-237041703|report/judgment_location_article.pdf*report/judgment_location_article.Rmd*report/judgment_location_article_files|t19667.615714114s||182043|file|local|vector|||0.63||judgment_location_article.Rmd does not exist in current working directory CUsersstepaOneDrive  HumboldtUniversitaet zu Berlin, CMSProgramminglocation_consistency_article.
+subset_data|function|4664790c897443bc|||||||||||||||
+write_data|stem|8d4f990b9da4799a|be28aace32a688bc|ea1b0c3ab69a34b3|98479520||t19667.644165168s|a1cb003df9914e5a|10790|rds|local|vector|||0||
+write_fitted_discrimination|stem|a81c277df2112a23|32ffda980b5f608a|306372a9a5050aa0|757222615||t19684.8152748287s|25bf6aaed7ba01e8|6550|rds|local|vector|||0.001||
+write_fitted_restitution|stem|93d1aa16478e0460|cc43f1f4e16295c9|9a42e0a613e487ba|1320926687||t19684.815274799s|2e4eeda1da614ffe|12253|rds|local|vector|||0.001||

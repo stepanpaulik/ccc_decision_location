@@ -13,13 +13,12 @@ trackdown::update_file(file = "report/judgment_location_article.Rmd",
                        gpath = "judgment_location/report", 
                        hide_code = TRUE)
 
-# googledrive::drive_put(media = "report/dissents_article.pdf",
-#                        path = "dissents_articles/quantitative_article/dissents_article.pdf")
+# googledrive::drive_put(media = "report/judgment_location_article.pdf",
+#                           path = "judgment_location/report/judgment_location_article.pdf")
 
-# googledrive::drive_update(media = "report/dissents_article.pdf", 
-#                           file = "dissents_articles/quantitative_article/dissents_article.pdf")
+googledrive::drive_update(media = "report/judgment_location_article.pdf",
+                          file = "judgment_location/report/judgment_location_article.pdf")
 
 # Download the file
 trackdown::download_file(file = "report/judgment_location_article.Rmd",
-                         gpath = "judgment_location/report", 
-                         hide_code = TRUE)
+                         gpath = "judgment_location/report")
