@@ -62,7 +62,7 @@
 \title{Locating Czech Constitutional Court Decisions in Doctrine Space
 and Measuring its Caselaw Consistency}
 \author{true \and true}
-\date{November 23, 2023}
+\date{December 02, 2023}
 
 % Jesus, okay, everything above this comment is default Pandoc LaTeX template. -----
 % ----------------------------------------------------------------------------------
@@ -289,6 +289,9 @@ statistics, regression analysis \par
 % We'll put doublespacing here
 \doublespacing
 % Remember to cut it out later before bib
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
 The question of to what extent is court case law consistent has been of
 interest of legal scholarship as well as legal practice for quite some
 time. While the question has been posed in the context development of
@@ -300,8 +303,8 @@ works about caselaw consistency are typical doctrinal, presenting
 examples of mutually incompatible decisions, we study caselaw
 consistency empirically employing quantitative methods.
 
-\hypertarget{literature-review}{%
-\section{Literature review}\label{literature-review}}
+\hypertarget{theory}{%
+\section{Theory}\label{theory}}
 
 The issue of estimating caselaw consistency effectively boils down to
 two issues: firstly, the estimation of location of a case in a
@@ -309,7 +312,7 @@ case-space and, secondly, to quantitatively conceptualizing consistency
 of caselaw. In both aspects, we build on previous work - on the
 empirical development of estimating location of a judicial decision in a
 common case-space (Kornhauser 1992a, 1992b; Lax 2011) and theoretical
-work into consistency law across court chambers (Fjelstul 2021).
+work into consistency law across court chambers (Fjelstul 2023).
 
 \hypertarget{locating-court-decisions}{%
 \subsection{Locating court decisions}\label{locating-court-decisions}}
@@ -384,16 +387,16 @@ with the specific case being a scalar on that dimension.
 To dispose of the case, the judge
 
 \hypertarget{case-law-consistency}{%
-\section{Case-law consistency}\label{case-law-consistency}}
+\subsection{Case-law consistency}\label{case-law-consistency}}
 
 \hypertarget{theoretical-conceptualization-and-operationalization-of-case-law-consistency}{%
-\subsection{Theoretical conceptualization and operationalization of
+\subsubsection{Theoretical conceptualization and operationalization of
 case-law
 consistency}\label{theoretical-conceptualization-and-operationalization-of-case-law-consistency}}
 
 We now move on to elucidating how we understand the term
 \emph{consistency} of case-law or of \emph{a court's application of the
-law} (Fjelstul 2021, 2). Our understanding is firmly rooted in and
+law} (Fjelstul 2023, 2). Our understanding is firmly rooted in and
 builts upon the definition provided by Fjelstul in his theoretical study
 of the chamber system at the European Court of Justice (CJEU). Therein,
 Fjelstul theoretically conceptualizes \emph{consistency} ``as the degree
@@ -402,7 +405,7 @@ different chamber'' of a court.
 
 Fjelstul operationalizes the theoretical definition as ``the variance of
 the distribution of the expected probability that the plaintiff wins a
-case across counterfactual chambers'' (Fjelstul 2021, 2)
+case across counterfactual chambers'' (Fjelstul 2023, 2)
 
 In theory, both the theoretical definition and operationalization are
 counterfactual as we can never observe how any given decision would be
@@ -416,7 +419,7 @@ without necessarily uncovering any causal relationship in the sense of
 of CCC's caselaw?}
 
 \hypertarget{literature-review-of-case-law-inconsistency-at-the-ccc}{%
-\subsection{Literature review of case-law inconsistency at the
+\subsubsection{Literature review of case-law inconsistency at the
 CCC}\label{literature-review-of-case-law-inconsistency-at-the-ccc}}
 
 The objective of our contribution is to present research in which we
@@ -433,7 +436,7 @@ will examine primarily the consistency of the Court's case law across
 senates and the plenum. The interplay between the consistency of case
 law and a court's internal structure has already been the subject of
 quantitative empirical research in the context of the Court of Justice
-of the European Union (Fjelstul 2021), which we build upon.
+of the European Union (Fjelstul 2023), which we build upon.
 
 Scholarly literature is basically unanimous (Bobek and Kühn 2013) in the
 notion that the case law of the Constitutional Court is inconsistent due
@@ -456,8 +459,27 @@ case law inconsistency.
 The area of restitutions is widely considered to be one of the most
 disputed legal-political issues after the Velvet Revolution in 1989.
 
+\hypertarget{method}{%
+\section{Method}\label{method}}
+
+Regarding the method, we employ a mix of quantitative methods (Bayesian
+statistics) and legal computational studies. First, we narrow down the
+selection of decisions to those falling under the given issues based on
+the subject matter index. With access to data from the Beck-online
+database, we can subsequently identify mutual citations in the
+Constitutional Court's case law, including the positive/negative
+relationship. The entire process of data wrangling is conducted using
+our custom code in the R programming language with the Tidyverse
+package. Meanwhile, we adapt Clark and Lauderdale's Bayesian model using
+the available code to replicate their research. But we use the more
+modern RStan as the Bayesian environment instead of RJags to simulate
+the Markov Chains Monte Carlo: ``Stan's MCMC techniques are based on
+Hamiltonian Monte Carlo, a more efficient and robust sampler than Gibbs
+sampling or Metropolis Hastings for models with complex posteriors.''
+(Brooks et al. 2011)
+
 \hypertarget{model-selection-and-specification}{%
-\section{Model selection and
+\subsection{Model selection and
 specification}\label{model-selection-and-specification}}
 
 At first, we stood before a choice between two models developed for the
@@ -504,24 +526,9 @@ speech decision, whereas strict lower court defamation decisions will
 altogether refer to different legal provisions than lenient defamation
 decisions.
 
-\hypertarget{method}{%
-\section{Method}\label{method}}
-
-Regarding the method, we employ a mix of quantitative methods (Bayesian
-statistics) and legal computational studies. First, we narrow down the
-selection of decisions to those falling under the given issues based on
-the subject matter index. With access to data from the Beck-online
-database, we can subsequently identify mutual citations in the
-Constitutional Court's case law, including the positive/negative
-relationship. The entire process of data wrangling is conducted using
-our custom code in the R programming language with the Tidyverse
-package. Meanwhile, we adapt Clark and Lauderdale's Bayesian model using
-the available code to replicate their research. But we use the more
-modern RStan as the Bayesian environment instead of RJags to simulate
-the Markov Chains Monte Carlo: ``Stan's MCMC techniques are based on
-Hamiltonian Monte Carlo, a more efficient and robust sampler than Gibbs
-sampling or Metropolis Hastings for models with complex posteriors.''
-(Brooks et al. 2011)
+\hypertarget{results}{%
+\section*{Results}\label{results}}
+\addcontentsline{toc}{section}{Results}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
@@ -545,10 +552,10 @@ Opinions} in {Doctrine Space}.''} \emph{American Journal of Political
 Science} 54 (4): 871--90.
 \url{https://doi.org/10.1111/j.1540-5907.2010.00470.x}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-fjelstulHowChamberSystem2021}{}}%
-Fjelstul, Joshua. 2021. {``How the {Chamber System} at the {CJEU
+\leavevmode\vadjust pre{\hypertarget{ref-fjelstulHowChamberSystem2023}{}}%
+Fjelstul, Joshua. 2023. {``How the {Chamber System} at the {CJEU
 Undermines} the {Consistency} of the {Court}'s {Application} of {EU
-Law}.''} \emph{Journal of Law and Courts}, November, 717422.
+Law}.''} \emph{Journal of Law and Courts}, 717422.
 \url{https://doi.org/10.1086/717422}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-harastaCitacniAnalyzaJudikatury2021}{}}%

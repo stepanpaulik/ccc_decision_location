@@ -35,7 +35,7 @@ data = readxl::read_xlsx("data/US_Cituje.xlsx") %>%
                              quality %in% negative_citation ~ 0))
 field_subjects_ratios = list()
 field_subjects_ratios$names = field_subjects
-field_subjects_ratios$data = map(.x = field_subjects_data, ~data %>%
+field_subjects_ratios$data = map(.x = field_subjects_data, ~data %>% # OPRAVIT
                           filter(citing_doc_id %in% .x$case_id) %>%
                           filter(cited_doc_id %in% .x$case_id) %>%
                           left_join(., .x, by = join_by(citing_doc_id == case_id, citing_date_decision == date_decision)) %>%
@@ -58,4 +58,6 @@ field_subjects_ratios = field_subjects_ratios %>%
   unnest_longer(data)
 
 # write_csv(field_subjects_ratios, "data/field_subjects_ratios.csv")
+
+field_subjects_ratios = read_rds(file = "data/field_subjects_ratios.rsd")
 

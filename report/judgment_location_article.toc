@@ -1,8 +1,10 @@
-\contentsline {section}{\numberline {1}Literature review}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Locating court decisions}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Case-space model}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Case-law consistency}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Theoretical conceptualization and operationalization of case-law consistency}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Literature review of case-law inconsistency at the CCC}{4}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Model selection and specification}{5}{section.3}%
-\contentsline {section}{\numberline {4}Method}{6}{section.4}%
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Theory}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Locating court decisions}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Case-space model}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Case-law consistency}{4}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Theoretical conceptualization and operationalization of case-law consistency}{4}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Literature review of case-law inconsistency at the CCC}{4}{subsubsection.2.3.2}%
+\contentsline {section}{\numberline {3}Method}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Model selection and specification}{6}{subsection.3.1}%
+\contentsline {section}{Results}{7}{subsection.3.1}%
