@@ -177,6 +177,11 @@ ozv_p4 = data_ozv %>%
 
 ozv_combined = ozv_p3 + ozv_p4
 
+ozv_p1
+ozv_p2
+ozv_p3
+ozv_p4
+
 # Save plots
 ggsave(filename = "report/graphics/ozv_combined.png", plot = ozv_combined, dpi = 600)
 ggsave(filename = "report/graphics/ozv_p1.png", plot = ozv_p1, dpi = 600)
