@@ -31,14 +31,11 @@ bibliography: "`r rbbt::bbt_write_bib(path = 'bibliography.bib', overwrite = TRU
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(lemon)
 
-knit_print.tibble = lemon_print
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 # Introduction
-
 The question of to what extent is court case law consistent has been of interest of legal scholarship as well as legal practice for quite some time.
 While the question has been posed in the context development of caselaw over time, in the case of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, ECJ or typically national constitutional courts.
 While works about caselaw consistency are typical doctrinal, presenting examples of mutually incompatible decisions, we study caselaw consistency empirically employing quantitative methods.
@@ -56,8 +53,7 @@ Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamic
 However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
 
 Recent developments in information technology enable more precise and diverse work with data, specifically with text of court decisions as data.
-This progress is starting to make its way into social and legal sciences.
-Two research teams have utilised the progress to overcome the aforementioned limitations in traditional estimation efforts of judicial decisions and judges' positions.
+This progress is starting to make its way into social and legal sciences outside the US as well, the first issue of the recently released European Journal on Empirical Studies proves this point [@bhupatirajuMappingGeometryLaw2024; @chauComputationalLegalStudies2024]. Two research teams have utilised the progress to overcome the aforementioned limitations in traditional estimation efforts of judicial decisions and judges' positions.
 
 Both models rest on the assumption that a location of a court decision can be estimated based on its relationship to other court decisions and sources of law.
 Courts typically justify their conclusion by reference to other court decisions or laws that is typically close to them in a case-space.
@@ -72,10 +68,10 @@ We now move on to the understanding and relevance of a case-space.
 ## Case-space model
 
 The case-space model was developed in an attempt to model the idiosyncrasies of court decision-making, i.e. that a court is a body resolving disputes, cases.
-The idea of cases must be taken seriously: we must be able to represent a case and what rendering a judgment in any case means.\
+The idea of cases must be taken seriously: we must be able to represent a case and what rendering a judgment in any case means.
 The way to represent a case is by locating it in a space of of possible cases, the case-space.
 A case then dennotes a "legally relevant event that has occured" out of many that could've occured.
-A car in a 30km/h zone could've in one case gone 28 km/h or in another 32 km/h.
+A car in a 30km/h zone could have in one case gone 28 km/h or in another 32 km/h.
 For the sake of simplicity, the case-space is a uni-dimensional space, a line, with the specific case being a scalar on that dimension.
 
 To dispose of the case, the judge
@@ -85,19 +81,17 @@ To dispose of the case, the judge
 ### Theoretical conceptualization and operationalization of case-law consistency
 
 We now move on to elucidating how we understand the term *consistency* of case-law or of *a court's application of the law* [@fjelstulHowChamberSystem2023, p. 2].
-Our understanding is firmly rooted in and builts upon the definition provided by Fjelstul in his theoretical study of the chamber system at the European Court of Justice (CJEU).
+Our understanding is firmly rooted in and builds upon the definition provided by Fjelstul in his theoretical study of the chamber system at the European Court of Justice (CJEU).
 Therein, Fjelstul theoretically conceptualizes *consistency* "as the degree to which the disposition of a case would change if it were decided by a different chamber" of a court.
 
-Fjelstul operationalizes the theoretical definition as "the variance of the distribution of the expected probability that the plaintiff wins a case across counterfactual chambers" [@fjelstulHowChamberSystem2023, p. 2]
+Fjelstul operationalizes the theoretical definition as "the variance of the distribution of the expected probability that the plaintiff wins a case across counterfactual chambers" [@fjelstulHowChamberSystem2023, p. 2] Put differently, an application of law before a court is consistent only if a court would reach the same conclusion in the same case with the same party, regardless of its composition or the deciding formation.
 
-In theory, both the theoretical definition and operationalization are counterfactual as we can never observe how any given decision would be decided by more than one actual court chamber.
+In theory, both the theoretical definition and operationalization are counter-factual as we can never observe how any given decision would be decided by more than one actual court chamber.
 We can, however, attempt to measure the trend across general population of cases falling into one case-space.
 And while we are aware that comparison based on observational data is not conclusive of any causal relationship, our ambition is only to offer a descriptive analysis of the CCC's caselaw without necessarily uncovering any causal relationship in the sense of *what type of underlying feature leads to higher/lower consistency of CCC's caselaw?*
 
 ### Literature review of case-law inconsistency at the CCC
-
-The objective of our contribution is to present research in which we apply Clark and Lauderdale's method to the Czech Constitutional Court since we believe their approach is more suitable for the institutional setup of the Constitutional Court, where decisions refer primarily to its own case law [@harastaCitacniAnalyzaJudikatury2021, p. 220] and references to legal provisions are not as diverse (Constitution, Charter of Fundamental Rights and Freedoms).
-However, we also intend to try the German method to compare the outcomes.
+The objective of our contribution is to present research in which we apply Clark and Lauderdale's method to the Czech Constitutional Court. We believe their approach is more suitable for the institutional setup of the Constitutional Court, where decisions refer primarily to its own case law [@harastaCitacniAnalyzaJudikatury2021, p. 220] and references to legal provisions are not as diverse (Constitution, Charter of Fundamental Rights and Freedoms).
 
 Based on the estimated positions of Constitutional Court decisions, we will examine primarily the consistency of the Court's case law across senates and the plenum.
 The interplay between the consistency of case law and a court's internal structure has already been the subject of quantitative empirical research in the context of the Court of Justice of the European Union [@fjelstulHowChamberSystem2023], which we build upon.
@@ -114,11 +108,7 @@ The area of restitutions is widely considered to be one of the most disputed leg
 
 # Method
 
-Regarding the method, we employ a mix of quantitative methods (Bayesian statistics) and legal computational studies.
-First, we narrow down the selection of decisions to those falling under the given issues based on the subject matter index.
-With access to data from the Beck-online database, we can subsequently identify mutual citations in the Constitutional Court's case law, including the positive/negative relationship.
-The entire process of data wrangling is conducted using our custom code in the R programming language with the Tidyverse package.
-Meanwhile, we adapt Clark and Lauderdale's Bayesian model using the available code to replicate their research.
+Regarding the method, we employ a mix of quantitative methods (Bayesian statistics) and legal computational studies. First, we narrow down the selection of decisions to those falling under the given issues based on the subject matter index. With access to data from the Beck-online database, we can subsequently identify mutual citations in the Constitutional Court's case law. The data on mutual citations includes the information whether the citation was positive or negative (overruling, distinguishing). The prepared data are then fed into the Clark and Lauderdale's Bayesian model using the available code to replicate their research.
 But we use the more modern RStan as the Bayesian environment instead of RJags to simulate the Markov Chains Monte Carlo: "Stan's MCMC techniques are based on Hamiltonian Monte Carlo, a more efficient and robust sampler than Gibbs sampling or Metropolis Hastings for models with complex posteriors." [@brooksHandbookMarkovChain2011]
 
 ## Model selection and specification

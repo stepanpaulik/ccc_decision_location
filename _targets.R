@@ -5,7 +5,7 @@ source("scripts/2_model.R", chdir = T)
 tar_option_set(packages = c("tidyverse"))
 
 list(
-  tar_target(metadata, "../data/US_metadata.rds", format = "file"),
+  tar_target(metadata, "../data/ccc_dataset/rds/ccc_metadata.rds", format = "file"),
   tar_target(input, "data/US_Cituje.xlsx", format = "file"),
   tar_target(model_specification, "scripts/ModelUS.txt", format = "file"),
   tar_target(cases_discrimination, subset_data(file = metadata, subject = "discrimination")),

@@ -6,25 +6,29 @@ file = "../data/US_metadata.rds"
 subset_data = function(file, subject){
   # Creates a DF with unique doc_ids as well as filtered restitution cases
   if(subject == "restitution"){
-    output = read_rds(file) %>%
-      filter(grepl("restitu", field_register)) %>%
+    output = read_rds(file) %>% 
+      mutate(subject_register = as.character(subject_register)) %>%
+      filter(grepl("restitu", subject_register)) %>%
       select(doc_id, case_id, date_decision)
   }
   
   if(subject == "discrimination"){
-    output = read_rds(file) %>%
-      filter(grepl("diskriminace", field_register)) %>%
+    output = read_rds(file) %>% 
+      mutate(subject_register = as.character(subject_register)) %>%
+      filter(grepl("diskriminace", subject_register)) %>%
       select(doc_id, case_id, date_decision)
   }
   
   if(subject == "ozv"){
-    output = read_rds(file) %>%
-      filter(grepl("becně závazná vyhláška", field_register)) %>%
+    output = read_rds(file) %>% 
+      mutate(subject_register = as.character(subject_register)) %>%
+      filter(grepl("becně závazná vyhláška", subject_register)) %>%
       select(doc_id, case_id, date_decision)
   }
   if(subject == "oop"){
-    output = read_rds(file) %>%
-      filter(grepl("opatření obecné povahy", field_register)) %>%
+    output = read_rds(file) %>% 
+      mutate(subject_register = as.character(subject_register)) %>%
+      filter(grepl("opatření obecné povahy", subject_register)) %>%
       select(doc_id, case_id, date_decision)
   }
   output = output %>%
