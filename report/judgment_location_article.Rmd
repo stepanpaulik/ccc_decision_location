@@ -40,6 +40,10 @@ The question of to what extent is court case law consistent has been of interest
 While the question has been posed in the context development of caselaw over time, in the case of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, ECJ or typically national constitutional courts.
 While works about caselaw consistency are typical doctrinal, presenting examples of mutually incompatible decisions, we study caselaw consistency empirically employing quantitative methods.
 
+In our article, we deploy the scaling model of [@clarkLocatingSupremeCourt2010] to test whether it works outside the US context and to attempt to measure the consistency of CCC's case-law. "Given the centrality of theories of judicial policymaking to various substantive problems in political science, the method of scaling opinions developed in this article can facilitate a range of future research."
+
+The purpose of applying the Clark model is to estimate the legal position taken by a given opinion, notwithstanding its outcome, i.e. notwithstanding its disposition. 
+
 # Theory
 
 The issue of estimating caselaw consistency effectively boils down to two issues: firstly, the estimation of location of a case in a case-space and, secondly, to quantitatively conceptualizing consistency of caselaw.
@@ -60,18 +64,20 @@ Courts typically justify their conclusion by reference to other court decisions 
 Both teams make the following assumptions (a) each opinion has a fixed location along a single latent dimensions delimited by a common case-space and (b) they assume a proximity relationship, i.e. the probability of a (positive) reference to a court decision or other sources of law increases the closer the decisions are to each other in a case-space [@clarkLocatingSupremeCourt2010; @arnoldScalingCourtDecisions2023].
 
 The exact understanding of the relationship between a reference between two decisions and their position on the latent dimension can be understood in two manners.
-According to Clark and Lauderdale, *directional models* assume "that an opinion is more likely to cite a precedent if the precedent has the same [ideological] polarity as the opinion", whereas *proximity models* assume that "the probability of a positive citation fro man opinion to a precedent decreases as the doctrine between the two opinions diverges." [@clarkLocatingSupremeCourt2010, p. 875].
-Both studies, upon which we build, ultimately base their model on the proximity model for it better reflects the assumed practice of citing court decisions: "Given the choice between two precedents with identical doctrine and differing directional outcomes, we believe that a justice in this situation would cite both precedents positively." [@clarkLocatingSupremeCourt2010, p. 875] Moreover, the proximity model better corresponds to the recent shift to model court decisions in a case-space.
-Thus, we do not diverge from the original studies.
-We now move on to the understanding and relevance of a case-space.
+According to Clark and Lauderdale, *directional models* assume "that an opinion is more likely to cite a precedent if the precedent has the same [ideological] polarity as the opinion", whereas *proximity models* assume that "the probability of a positive citation from an opinion to a precedent decreases as the doctrine between the two opinions diverges." [@clarkLocatingSupremeCourt2010, p. 875].
+Both studies, upon which we build, ultimately base their model on the proximity model for it better reflects the assumed practice of citing court decisions: "Given the choice between two precedents with identical doctrine and differing directional outcomes, we believe that a justice in this situation would cite both precedents positively." [@clarkLocatingSupremeCourt2010, p. 875] Moreover, the proximity model better corresponds to the recent shift to model court decisions in a case-space. Thus, we do not diverge from the original studies.
+
+
 
 ## Case-space model
+In order to be able to scale the legal position of court decisions, the set of cases must fall within the same case-space. We now move on to the understanding and relevance of a case-space model.
 
-The case-space model was developed in an attempt to model the idiosyncrasies of court decision-making, i.e. that a court is a body resolving disputes, cases.
-The idea of cases must be taken seriously: we must be able to represent a case and what rendering a judgment in any case means.
-The way to represent a case is by locating it in a space of of possible cases, the case-space.
-A case then dennotes a "legally relevant event that has occured" out of many that could've occured.
-A car in a 30km/h zone could have in one case gone 28 km/h or in another 32 km/h.
+The case-space model was developed in an attempt to model the idiosyncrasies of court decision-making, i.e. that a court is a body resolving disputes, cases. Its starting point is that the idea of a case must be taken seriously: we must be able to represent a case and what rendering a judgment in any case means. In contrast to legislative models, "judicial preferences and goals are structured by the choices available to judges: dispositions and the rules that denote general sets of case dispositions. The second is that judicial choices, rule creation, and rule application are deeply affected by collegial and hierarchical (horizontal and vertical) divisions of power." [@laxNewJudicialPolitics2011] Thus, the case-space model incorporates into itself legal rules, the judges' preference towards them, as well as the facts of the case.
+
+More specifically, the way to represent a case is by locating it in a space of of possible cases, the case-space. A case then denotes a "legally relevant event that has occurred" out of many that could have occurred. A car in a 30km/h zone could have in one case gone 28 km/h or in another 32 km/h. Both possibilities represent a case of a set of cases on the common case-space. A legal rule is, then, a partition of the case-space into whoever wins and whoever loses the case. However, where exactly does the legal rule cut across the case-space is determined by the judges' preferences towards the legal rule. As @laxNewJudicialPolitics2011 puts it, battles over law are struggles over partitions of the case space. The disposition of the case then refers to which party wins the case.
+
+@landaDisagreementsCollegialCourts2007 draw from the case-space model multiple theoretical sources of disagreement. The first and clear source of disagreement among judges is that about facts. Different judges may place the facts of the case in the case-space differently. There other sources of disagreement: which dimensions should be relevant under any given legal rule to determine the disposition of a case, disagreement about "thresholds" within dimensions, and a couple of more sources of disagreement, which all can be summarized as a disagreement about the legal rule. All these sources of disagreement may lead to inconsistency across judges and chambers. If one judge views the facts of the case differently from others, different chamber composed of different judges may not reach the same conclusion given the same set of legally relevant facts. The same applies to judges' preferences over legal rules.
+
 For the sake of simplicity, the case-space is a uni-dimensional space, a line, with the specific case being a scalar on that dimension.
 
 To dispose of the case, the judge
