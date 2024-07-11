@@ -25,6 +25,7 @@ disc_p1 = data_discrimination %>%
   labs(x = "Year of the decision",
        y = "Estimated location of a decision",
        title = "Development over time")
+disc_p1 
 
 disc_p2 = data_discrimination %>%
   ggplot(mapping = aes(x = x.opinion.est)) +
@@ -49,6 +50,8 @@ disc_p4 = data_discrimination %>%
   coord_flip()  +
   labs(y = "Estimated location of a decision",
        x = NULL)
+
+disc_p4
 
 disc_combined = disc_p1 + disc_p3
 
@@ -89,6 +92,8 @@ rest_p4 = data_restitution %>%
   labs(y = "Estimated location of a decision",
        x = NULL,
        title = "Overview of decisions whose location\nstatistically significantly differs from 0")
+
+rest_p4 
 
 rest_combined = rest_p3 + rest_p4
 
@@ -132,6 +137,8 @@ oop_p4 = data_oop %>%
   labs(y = "Estimated location of a decision",
        x = NULL,
        title = "Overview of decisions whose location\nstatistically significantly differs from 0")
+
+oop_p4
 
 oop_combined = oop_p3 + oop_p4
 

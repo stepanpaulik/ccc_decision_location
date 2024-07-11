@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Theory}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Locating court decisions}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Case-space model}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Case-law consistency}{4}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Theoretical conceptualization and operationalization of case-law consistency}{4}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}The CCC and its case-law inconsistency}{5}{subsubsection.2.3.2}%
+\contentsline {section}{\numberline {3}Method}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Model selection and specification}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Data}{9}{subsection.3.2}%
+\contentsline {section}{Results}{9}{section*.2}%

@@ -1,14 +1,13 @@
 library(tidyverse)
 library(readxl)
 
-file = "../data/US_metadata.rds"
-
 subset_data = function(file, subject){
   # Creates a DF with unique doc_ids as well as filtered restitution cases
   if(subject == "restitution"){
     output = read_rds(file) %>% 
       mutate(subject_register = as.character(subject_register)) %>%
       filter(grepl("restitu", subject_register)) %>%
+      filter(grounds == "merits") %>%
       select(doc_id, case_id, date_decision)
   }
   
@@ -16,6 +15,7 @@ subset_data = function(file, subject){
     output = read_rds(file) %>% 
       mutate(subject_register = as.character(subject_register)) %>%
       filter(grepl("diskriminace", subject_register)) %>%
+      filter(grounds == "merits") %>%
       select(doc_id, case_id, date_decision)
   }
   
@@ -23,12 +23,14 @@ subset_data = function(file, subject){
     output = read_rds(file) %>% 
       mutate(subject_register = as.character(subject_register)) %>%
       filter(grepl("becně závazná vyhláška", subject_register)) %>%
+      filter(grounds == "merits") %>%
       select(doc_id, case_id, date_decision)
   }
   if(subject == "oop"){
     output = read_rds(file) %>% 
       mutate(subject_register = as.character(subject_register)) %>%
       filter(grepl("opatření obecné povahy", subject_register)) %>%
+      filter(grounds == "merits") %>%
       select(doc_id, case_id, date_decision)
   }
   output = output %>%
@@ -43,7 +45,7 @@ finalise_data = function(file, cases) {
   positive_citation = c("Souhlasí a Následuje", "Vysvětlení", "Aplikuje a rozvíjí", "Vysvětlení", "Neaplikuje, ale souhlasí")
   negative_citation = c("Citováno odlišným stanoviskem", "Nesouhlasí, neaplikuje", "Překonán")
   
-  readxl::read_xlsx(file) %>%
+  data = readxl::read_xlsx(file) %>%
     rename(citing_doc_id = "Sp. zn.",
            citing_date_decision = "Ze dne",
            citing_type_decision = "Druh",
@@ -55,9 +57,9 @@ finalise_data = function(file, cases) {
            quality = "Kvalita",
            database = "Máme citované J v db") %>%
     mutate(citing_doc_id = str_replace(string = citing_doc_id, pattern = " ÚS", replacement = "ÚS"),
-           citing_date_decision = ymd(citing_date_decision),
+           citing_date_decision = as_date(citing_date_decision),
            cited_doc_id = str_replace(string = cited_doc_id, pattern = " ÚS", replacement = "ÚS"),
-           cited_date_decision = ymd(cited_date_decision)) %>%
+           cited_date_decision = as_date(cited_date_decision)) %>%
     left_join(., cases, by = join_by(citing_doc_id == case_id, citing_date_decision == date_decision)) %>%
     mutate(citing_doc_id = doc_id) %>%
     select(-doc_id) %>%

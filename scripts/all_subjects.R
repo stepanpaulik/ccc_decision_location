@@ -4,18 +4,18 @@ library(furrr)
 source("scripts/data_wrangling.R", chdir = T)
 source("scripts/model.R", chdir = T)
 
-metadata = read_rds("../data/US_metadata.rds") %>%
+metadata = readr::read_rds("../data/ccc_database/rds/ccc_metadata.rds") %>%
   select(doc_id, case_id, date_decision, field_register, formation) %>%
   unnest_longer(field_register)
 
 field_subjects = unique(metadata$field_register)
 
-field_subjects_data = map(.x = field_subjects, ~filter(.data = metadata, field_register == .x))
+field_subjects_data = map(.x = field_subjects, ~filter(.data = metadata, field_register == .x))Q
 
 positive_citation = c("Souhlasí a Následuje", "Vysvětlení", "Aplikuje a rozvíjí", "Vysvětlení", "Neaplikuje, ale souhlasí")
 negative_citation = c("Citováno odlišným stanoviskem", "Nesouhlasí, neaplikuje", "Překonán")
 
-data = readxl::read_xlsx("data/US_Cituje.xlsx") %>%
+data = readxl::read_xlsx("data/US_Cituje_old.xlsx") %>%
   rename(citing_doc_id = "Sp. zn.",
          citing_date_decision = "Ze dne",
          citing_type_decision = "Druh",
@@ -32,10 +32,9 @@ data = readxl::read_xlsx("data/US_Cituje.xlsx") %>%
          cited_date_decision = ymd(cited_date_decision)) %>%
   mutate(citing_doc_id = str_remove(string = citing_doc_id, pattern = "-[0-9]+"),
          cited_doc_id = str_remove(string = cited_doc_id, pattern = "-[0-9]+")) %>%
-  drop_na(quality) %>%
-  filter(cited_court == "Ústavní soud" & quality != "Neuvedeno") %>%
   mutate(quality = case_when(quality %in% positive_citation ~ 1,
                              quality %in% negative_citation ~ 0))
+
 field_subjects_ratios = list()
 field_subjects_ratios$names = field_subjects
 field_subjects_ratios$data = map(.x = field_subjects_data, ~data %>%

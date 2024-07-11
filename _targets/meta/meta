@@ -1,40 +1,23 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-cases_discrimination|stem|1bff7e2dc6ca0fef|e4ba51540201fe32|877f431150dba672|-898831780||t19858.6174897771s|b2aa64500608be15|7696|rds|local|vector|||1.658||
-cases_oop|stem|20839087059763da|7b65f9d5b303a24d|877f431150dba672|1556407272||t19858.6175090734s|83207a8a6e39eb8f|2841|rds|local|vector|||1.664||
-cases_ozv|stem|d043d884e9d12306|311677308d472738|877f431150dba672|-947842745||t19858.617449386s|9552774c7966b3ed|2435|rds|local|vector|||1.809||
-cases_restitution|stem|74e61dee06a85803|27c4e72e8a8a851a|877f431150dba672|-1295794339||t19858.617470539s|7f8f8acd04643b0e|12169|rds|local|vector|||1.823||
-cite_data|stem|8dfc6db803416aaf|22102efb934e0519|42015253d991bd11|-872149181||t19667.4255555556s|7b9df3674dfc98f8|3427|rds|local|vector|||0.014||
-cite_data_discrimination|stem|745e36ca58a7ff46|d05b1d7e61cf7131|4e4f4eea9eddf3a4|210313599||t19726.3578363322s|37e90c3ecba3a0b1|177|rds|local|vector|||0.007||
-cite_data_restitution|stem|745e36ca58a7ff46|be5f73b012b4056b|eafc18c71820dbf1|1941950309||t19726.3578362233s|37e90c3ecba3a0b1|177|rds|local|vector|||0.004||
-CiteData|stem|8dfc6db803416aaf|22102efb934e0519|42015253d991bd11|1767731591||t19667.3842231613s|7b9df3674dfc98f8|3427|rds|local|vector|||0.014||
-data|stem|721d792403a45016|92c3a36f3560bdc3|4b5be0d8bdac1359|1588979285||t19666.7899305556s|20bbc50c42e97e83|11348|rds|local|vector|||2.299||
-data_discriminiation|stem|dce1313482850c31|a9323232b51faacb|fe92a51af3baff9e|-1918981437||t19858.617578504s|120b3010895cb575|1380|rds|local|vector|||1.952|Detected an unexpected manytomany relationship between x and y.ℹ Row 218548 of x matches multiple rows in y.ℹ Row 18 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.. Detected an unexpected manytomany relationship between x and y.ℹ Row 57917 of x matches multiple rows in y.ℹ Row 419 of y matches multiple rows in x.ℹ If a manytomany relationship is expected, set relationship   manytomany to silence this warning.|
-data_oop|stem|12e78c10d6e075f9|bac78fcda51426dc|2ff15306145285a4|-311465507||t19858.6176013242s|e96812199bbe9bd0|707|rds|local|vector|||1.969||
-data_ozv|stem|47d8b54e9fb104c2|6ae1e3459d5dfd4d|cc67272a5c9bba86|-783787777||t19858.6175334032s|8acd8c1b6714e911|1697|rds|local|vector|||2.1||
-data_restitution|stem|6c2a2779c68552d5|7f6795e4c8298496|d368e57c66442974|-1163426024||t19858.6175558874s|72f1c319e9ce030d|1849|rds|local|vector|||1.937||
-data_subset|stem|9cba0ca80fcd9659|8b64361fe55ee890|29a7beb11348b6e0|1041076605||t19667.4224768519s|fc5a7f730a6956f4|12061|rds|local|vector|||1.476||
-file|object|1f348f31cbf39fee|||||||||||||||
-final_data|stem|8d4f990b9da4799a|839b5667e6eab925|79169f1ab4c76f79|-683886975||t19667.6414269637s|a1cb003df9914e5a|10790|rds|local|vector|||241.61||
-finalise_data|function|088bb8c9622b9ab7|||||||||||||||
+cases_discrimination|stem|d0446957e7ec6543|e4ba51540201fe32|addbd7b4b0fe3f27|-898831780||t19915.6070758459s|66e6f375516cb52c|2107|rds|local|vector|||1.664||
+cases_oop|stem|b7bf7805ff2fbbe6|7b65f9d5b303a24d|addbd7b4b0fe3f27|1556407272||t19915.6070961036s|9c6fef9881462672|789|rds|local|vector|||1.747||
+cases_ozv|stem|85950b6d0b213060|311677308d472738|addbd7b4b0fe3f27|-947842745||t19915.6070353519s|d13dd4ccbf4f0f39|1669|rds|local|vector|||1.843||
+cases_restitution|stem|ac10eb5fe6b1e380|27c4e72e8a8a851a|addbd7b4b0fe3f27|-1295794339||t19915.607056561s|4a1431a2709b35d0|2617|rds|local|vector|||1.83||
+data_discriminiation|stem|30f46824371c73e2|a9323232b51faacb|444f9532ec9f91c6|-1918981437||t19915.6071788619s|bd94cf479249d8d8|1294|rds|local|vector|||2.301|There was 1 warning in mutate.ℹ In argument cited_date_decision  as_datecited_date_decision.Caused by warning  33607 failed to parse.|
+data_oop|stem|1286b139223c9989|bac78fcda51426dc|2f9fa953427b8336|-311465507||t19915.6072035964s|20a663df0d3fb2bd|463|rds|local|vector|||2.134|There was 1 warning in mutate.ℹ In argument cited_date_decision  as_datecited_date_decision.Caused by warning  33607 failed to parse.|
+data_ozv|stem|b2a364298ee09aa2|6ae1e3459d5dfd4d|4b7033fdb95f1d60|-783787777||t19915.6071254654s|5abf3637db736843|1841|rds|local|vector|||2.534|There was 1 warning in mutate.ℹ In argument cited_date_decision  as_datecited_date_decision.Caused by warning  33607 failed to parse.|
+data_restitution|stem|ad60b243774f6f64|7f6795e4c8298496|785b0e06a840235a|-1163426024||t19915.6071521961s|4d7ec03481647af1|1486|rds|local|vector|||2.307|There was 1 warning in mutate.ℹ In argument cited_date_decision  as_datecited_date_decision.Caused by warning  33607 failed to parse.|
+finalise_data|function|d269f5838e7cf391|||||||||||||||
 fit_model|function|b29ba938f604f08a|||||||||||||||
-fitted_model_discrimination|stem|bb731310a27cba71|bfd803abbcae431e|08fd1d0b4cf06940|-1734205174||t19858.61896095s|6e0600e9a0c22805|5073|rds|local|vector|||28.308||
-fitted_model_oop|stem|610d790aca5d8426|a8f5b374e06e3cb4|69cce027d25a0d51|-694091509||t19858.6190952537s|7a3c8320f6a1f4cd|2456|rds|local|vector|||11.6||
-fitted_model_ozv|stem|518eb872fde0bcb5|87c10440391a25c0|cf0cf150d84c2706|706840147||t19858.6182252894s|3df85702d3736c7d|5652|rds|local|vector|||53.908||
-fitted_model_restitution|stem|8b29c1f44236c696|dcf2f474a1ca32e2|7955f6b1565dec75|-612038197||t19858.6186332726s|ce43322d8cca5b1b|7140|rds|local|vector|||35.246||
-get_data|function|ed3e2cbe5c428cc8|||||||||||||||
-input|stem|8b600bfd21f8d561|f20bae1c7c63328d|2c530c1562a7fbd1|-1867563021|data/US_Cituje.xlsx|t19731.7349764773s|54136ed09b24e2a8|14705272|file|local|vector|||0.001||
-input_subset|stem|a10c70bde8d85444|881e4ded05103989|ef46db3751d8e999|-948604022|../data/US_metadata.rds|t19660.6149510023s|041acff40bcae311|77118612|file|local|vector|||0||
-load_data|function|ed3e2cbe5c428cc8|||||||||||||||
-metadata|stem|a1dc2348788416ee|9d1e970144d465ec|2c530c1562a7fbd1|1529494452|../data/ccc_dataset/rds/ccc_metadata.rds|t19800.5390421025s|871f91b3a2b7b75a|115170299|file|local|vector|||0.001||
-model|stem|ce5c4e5c761c4b12|8ccefe0b6e84d86d|611f1ec51fb773b2|1816327236||t19667.4265520416s|4140e78f4aacf71b|19152433|rds|local|vector|||85.237||
+fitted_model_discrimination|stem|ac963f77c1ad0ff7|bfd803abbcae431e|aa0f6fce68f8ded3|-1734205174||t19915.6084914656s|4a80ec3634328e93|4363|rds|local|vector|||28.186||
+fitted_model_oop|stem|1be80777fd789d8c|a8f5b374e06e3cb4|bce90225a77786e7|-694091509||t19915.6085465273s|771a1c28e1458f90|1505|rds|local|vector|||4.755||
+fitted_model_ozv|stem|40a8bec784494dee|87c10440391a25c0|517c5e32d3eb7a73|706840147||t19915.6078457563s|5ede7031401e1658|5737|rds|local|vector|||55.48||
+fitted_model_restitution|stem|9fcf2a76a7d57e34|dcf2f474a1ca32e2|6d33d5a5b8bc8ff6|-612038197||t19915.6081651999s|c178f5b60d051a37|5339|rds|local|vector|||27.596||
+input|stem|886b9d95ba81e64e|f20bae1c7c63328d|2c530c1562a7fbd1|-1867563021|data/US_Cituje.xlsx|t19877.3517655682s|b6a71d6e0f1dddc1|16450897|file|local|vector|||0.001||
+metadata|stem|330fad9d63f06120|1dcf9804a1533a62|2c530c1562a7fbd1|1529494452|../data/ccc_database/rds/ccc_metadata.rds|t19887.4133321121s|4536fe71f38ab9fc|115194163|file|local|vector|||0||
 model_specification|stem|7945abe5cdb931d2|4179f867b3c9b465|2c530c1562a7fbd1|801854641|scripts/ModelUS.txt|t19530.3045102596s|0e9d2d7bbe99bbf8|298|file|local|vector|||0||
-prepare_cite_data|function|5820348099223b7c|||||||||||||||
-prepare_CiteData|function|5820348099223b7c|||||||||||||||
-process_model|function|67824733aca8fec9|||||||||||||||
-report|stem|5d611cb10b14f6aa|bf0db249c40935d1|ef46db3751d8e999|-237041703|report/judgment_location_article.pdf*report/judgment_location_article.Rmd*report/judgment_location_article_files|t19667.615714114s||182043|file|local|vector|||0.63||judgment_location_article.Rmd does not exist in current working directory CUsersstepaOneDrive  HumboldtUniversitaet zu Berlin, CMSProgramminglocation_consistency_article.
-subset_data|function|10da1ad5ed125250|||||||||||||||
-write_data|stem|8d4f990b9da4799a|be28aace32a688bc|ea1b0c3ab69a34b3|98479520||t19667.644165168s|a1cb003df9914e5a|10790|rds|local|vector|||0||
-write_fitted_discrimination|stem|bb731310a27cba71|bd265c625ff1acef|c221162dc484f811|55988504||t19858.6190953752s|6e0600e9a0c22805|5073|rds|local|vector|||0||
-write_fitted_oop|stem|610d790aca5d8426|a8ed440dc6664359|07b9837e0ebf5041|-614200021||t19858.6190954029s|7a3c8320f6a1f4cd|2456|rds|local|vector|||0.001||
-write_fitted_ozv|stem|518eb872fde0bcb5|19857ce6bf692044|845cd5725b96a2de|-433627780||t19858.6190953075s|3df85702d3736c7d|5652|rds|local|vector|||0.002||
-write_fitted_restitution|stem|8b29c1f44236c696|bfeca7780add213c|d8dd0df4dfd74fd9|-584391415||t19858.6190953411s|ce43322d8cca5b1b|7140|rds|local|vector|||0||
+subset_data|function|4090ad241e7c1131|||||||||||||||
+write_fitted_discrimination|stem|ac963f77c1ad0ff7|bd265c625ff1acef|ffdc7d9d723e6e2f|55988504||t19915.6085466271s|4a80ec3634328e93|4363|rds|local|vector|||0.001||
+write_fitted_oop|stem|1be80777fd789d8c|a8ed440dc6664359|59c2d3e6e8f70ed2|-614200021||t19915.6085466514s|771a1c28e1458f90|1505|rds|local|vector|||0||
+write_fitted_ozv|stem|40a8bec784494dee|19857ce6bf692044|b95b865280e243be|-433627780||t19915.6085465715s|5ede7031401e1658|5737|rds|local|vector|||0.001||
+write_fitted_restitution|stem|9fcf2a76a7d57e34|bfeca7780add213c|4ad99f6fb9e7df6c|-584391415||t19915.608546603s|c178f5b60d051a37|5339|rds|local|vector|||0.001||
