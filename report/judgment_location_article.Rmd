@@ -1,7 +1,6 @@
 ---
 output: 
   bookdown::pdf_document2: default
-  distill::distill_article: default
 title: "Locating Czech Constitutional Court Decisions in Doctrine Space and Measuring its Caselaw Consistency"
 abstract: "Our research explores the estimation of positions of Czech Constitutional Court decisions in a doctrine space using Bayesian statistical model. Traditional methods of estimating ideological positions suffer from limitations, prompting the adoption of new text-as-data approaches empowered by advances in computational technology and statistics. Two research teams have attempted to overcome previous constraints and estimate judicial positions more accurately, one in the SCOTUS context and one in the German lower courts context. Our study implements the method of Clark and Lauderdale of estimating the locations of SCOTUS decisions with positive or negative references to its caselaw: the closer decisions are to each other, the more likely they are to cite themselves positively and vice-versa. We combine our own dataset of all CCC decisions with the data on citations provided to us by Beck. We use the programming language R and the Bayesian engine Stan to estimate the positions employing the Bayesian model of Clark and Lauderdal. Estimating the positions allows us to examine the consistency of the CC's case law across different senates and the plenum. We narrow our analysis to areas of law in common doctrine space that are prone to inconsistency, namely restitution cases and costs of civil proceedings. The research contributes to harnessing the potential of machine learning and quantitative methods in legal research and clarifies the factors influencing caselaw consistency."
 author: 
@@ -9,92 +8,67 @@ author:
   - Jaromír Fronc, Charles University, Faculty of Law^[jaromir.fronc@gmail.com]
 keywords: "empirical legal research, courts, dissents, judicial behavior, political science, Bayesian statistics, regression analysis"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
+link-citations: yes
+linkcolor: blue
 geometry: margin=1in
 fontsize: 11pt
 doublespacing: TRUE
 endnote: no
-indent: true
-link-citations: yes
-linkcolor: blue
 # pandocparas: TRUE
 sansitup: FALSE
+mainfont: Times New Roman
 header-includes:
   - \usepackage{longtable}
   - \LTcapwidth=.95\textwidth
   - \linespread{1.05}
-  - \usepackage{hyperref}
   - \usepackage{float}
 bibliography: "`r rbbt::bbt_write_bib(path = 'bibliography.bib', overwrite = TRUE, library_id = rbbt::bbt_libraries()$id[rbbt::bbt_libraries()$name == 'location_consistency'])`"
 ---
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(targets)
+library(kableExtra)
+
+data_ozv = targets::tar_read(data_ozv, store = "../_targets/")
+fitted_model_ozv = targets::tar_read(fitted_model_ozv, store = "../_targets/")
+
+significant_ozv = fitted_model_ozv |>
+  filter(sign(higher) == sign(lower))
+
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 # Introduction
-The question of to what extent is court case law consistent has been of interest of legal scholarship as well as legal practice for quite some time.
-While the question has been posed in the context development of caselaw over time, in the case of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, CJEU or national apex (supreme and constitutional) courts.
-While works about caselaw consistency are typical doctrinal, presenting examples of mutually incompatible decisions, we study caselaw consistency empirically employing quantitative methods.
+The questions of to how does caselaw develop over time and to what extent do inconsistencies in court case law come about have been of interest of legal scholarship as well as legal practice for quite some time. Different methods have been employed in to capture such development, ranging from simply legal interpretation [as an example @vyhnanekJudikaturaUstavnimPravu2023], network analysis [@lupuPrecedentInternationalCourts2012; @coupetteMeasuringLawTime2021], to adoption of item response theory models from psychometrics [@clarkLocatingSupremeCourt2010; @barberaBirdsSameFeather2015; @arnoldScalingCourtDecisions2023]. 
 
-In our article, we deploy the scaling model of [@clarkLocatingSupremeCourt2010] to test whether it works outside the US context and to attempt to measure the consistency of CCC's case-law. "Given the centrality of theories of judicial policymaking to various substantive problems in political science, the method of scaling opinions developed in this article can facilitate a range of future research."
+In the presented paper, we deploy the scaling model based on the works of @clarkLocatingSupremeCourt2010; @barberaBirdsSameFeather2015; @arnoldScalingCourtDecisions2023 to uncover how does the caselaw of the Czech Constitutional Court develop over time. In building upon the work, we fullfill the wish of @clarkLocatingSupremeCourt2010: "Given the centrality of theories of judicial policymaking to various substantive problems in political science, the method of scaling opinions developed in this article can facilitate a range of future research." The development of computational technology enables employment of more advanced methods than simply reading the texts of court decisions, it does not render other methods useless. Quite on the contrary, our paper addresses many potential sources of struggle and limitations of employment of advance quantitative methods.
 
-The purpose of applying the Clark model is to estimate the legal position taken by a given opinion, notwithstanding its outcome, i.e. notwithstanding its disposition. 
+We find that the CCC caselaw has been relatively consistent. We also posit that the development in the form of precedents may be more gradual than previously assumed. Usually, a shift in court caselaw is equated with one landmark decision. Our data on the generally binding regulations (GBR) of the CCC shows that the shift may be more gradual and that it starts before the ladnmark decision. Lastly, the model further developed in this article can be employed to make topic modelling of court decisions more accurate and time efficient.
 
 # Theory
+The issue of estimating the development of caselaw overtime and its consistency effectively boils down to (1) establishing a consistent case-space, (2) estimating the location of a case in the case-space, and (3) assessing (quantitatively) its consistency. In all three aspects, we build on previous work - on theoretical work a common case-space [@kornhauserModelingCollegialCourts1992a; @kornhauserModelingCollegialCourts1992; @laxNewJudicialPolitics2011], on the empirical development of estimation of locations of court decisions [@clarkLocatingSupremeCourt2010; @arnoldScalingCourtDecisions2023], and on theoretical work into consistency law across court chambers [@fjelstulHowChamberSystem2023]. 
 
-The issue of estimating caselaw consistency effectively boils down to two issues: firstly, the estimation of location of a case in a case-space and, secondly, to quantitatively conceptualizing consistency of caselaw.
-In both aspects, we build on previous work - on the empirical development of estimating location of a judicial decision in a common case-space [@kornhauserModelingCollegialCourts1992a; @kornhauserModelingCollegialCourts1992; @laxNewJudicialPolitics2011] and theoretical work into consistency law across court chambers [@fjelstulHowChamberSystem2023].
+We now flesh out theory for these subtopics. In [section 2.1](#case-space), we discuss the concept and implications of case-space models. In [section 2.2](#consistency), we discuss the concept of development and consistency of court caselaw. Lastly, in [section 2.3](#estimation), we briefly go over the current work on estimating the location of court decisions. We reserve a more in depth discussion to [section 3](#method) on method.
 
-In the Czech legal system, there is not a precedent system *per se* comparable to the common law legal systems. However, the judges are still required to provide reasons for their judgments - often done in a way of citing other court decisions. The decision which legal sources to cite, which not to cite and how to cite them does not happen haphazardly. In line with the empirical studies on the role of precedent, we argue that the judges behave strategically in the sense that they care about the compliance with their decision. Second, the CCC judges find their decisions more persuasive if "legal consistency can be demonstrated across time and place". Third, the compliance with the CCC judgments is affected both by the lower courts' behavior as well as the other branches of power. Lastly, the embedding of decisions into the net of caselaw imputes time and effort costs on the CCC judges, who, therefore, have to make the decisions as to which cases to cite and which not to cite [@lupuPrecedentInternationalCourts2012]. Citing other CCC decisions enables the CCC justices to explain their conclusions and reasoning as well as to embed the decision within the network of other decisions. It also follows that not all references are the same: the judges can reference other decisions positively, whenever the cited decision and its reasoning is similar, and negative, whenever it is dissimilar.
-
-## Locating court decisions
-
-Traditionally mainly American empirical legal science has long tried to estimate a position of judges or judicial decisions, especially in the context of political ideology of SCOTUS (Supreme Court of the United States) decisions and judges.
-Based on this estimation, the research sought to answer subsequent sociological research questions.
-Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamicIdealPoint2002] scores are among the examples of attempts to quantify the ideological position of judgments or judges.
-However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
-
-Recent developments in information technology enable more precise and diverse work with data, specifically with text of court decisions as data.
-This progress is starting to make its way into social and legal sciences outside the US as well, the first issue of the recently released European Journal on Empirical Studies proves this point [@bhupatirajuMappingGeometryLaw2024; @chauComputationalLegalStudies2024]. Two research teams have utilised the progress to overcome the aforementioned limitations in traditional estimation efforts of judicial decisions and judges' positions.
-
-Both models rest on the assumption that a location of a court decision can be estimated based on its relationship to other court decisions and sources of law.
-Courts typically justify their conclusion by reference to other court decisions or laws that are typically close to them in a case-space.
-Both teams make the following assumptions (a) each opinion has a fixed location along a single latent dimensions delimited by a common case-space and (b) they assume a proximity relationship, i.e. the probability of a (positive) reference to a court decision or other sources of law increases the closer the decisions are to each other in a case-space [@clarkLocatingSupremeCourt2010; @arnoldScalingCourtDecisions2023].
-
-The exact understanding of the relationship between a reference between two decisions and their position on the latent dimension can be understood in two manners.
-According to Clark and Lauderdale, *directional models* assume "that an opinion is more likely to cite a precedent if the precedent has the same [ideological] polarity as the opinion", whereas *proximity models* assume that "the probability of a positive citation from an opinion to a precedent decreases as the doctrine between the two opinions diverges." [@clarkLocatingSupremeCourt2010, p. 875].
-Both studies, upon which we build, ultimately base their model on the proximity model for it better reflects the assumed practice of citing court decisions: "Given the choice between two precedents with identical doctrine and differing directional outcomes, we believe that a justice in this situation would cite both precedents positively." [@clarkLocatingSupremeCourt2010, p. 875] Moreover, the proximity model better corresponds to the recent shift to model court decisions in a case-space. Thus, we do not diverge from the original studies.
-
-
-## Case-space model
-In order to be able to scale the legal position of court decisions, the set of cases must fall within the same case-space. We now move on to the understanding and relevance of a case-space model.
-
+## Case-space model {#case-space}
 The case-space model was developed in an attempt to model the idiosyncrasies of court decision-making, i.e. that a court is a body resolving disputes, cases. Its starting point is that the idea of a case must be taken seriously: we must be able to represent a case and what rendering a judgment in any case means. In contrast to legislative models, "judicial preferences and goals are structured by the choices available to judges: dispositions and the rules that denote general sets of case dispositions. The second is that judicial choices, rule creation, and rule application are deeply affected by collegial and hierarchical (horizontal and vertical) divisions of power." [@laxNewJudicialPolitics2011] Thus, the case-space model incorporates into itself legal rules, the judges' preference towards them, as well as the facts of the case.
 
-More specifically, the way to represent a case is by locating it in a space of possible cases, the case-space. A case then denotes a "legally relevant event that has occurred" out of many that could have occurred. A car in a 30km/h zone could have in one case gone 28 km/h or in another 32 km/h. Both possibilities represent a case of a set of cases on the common case-space. A legal rule is, then, a partition of the case-space into whoever wins and whoever loses the case. However, where exactly the legal rule cuts across the case-space is determined by the judges' preferences towards the legal rule. As @laxNewJudicialPolitics2011 puts it, battles over law are struggles over partitions of the case space. The disposition of the case then refers to which party wins the case.
+More specifically, the way to represent a case is by locating it in a space of possible cases, the case-space. A case then denotes a "legally relevant event that has occurred" out of many that could have occurred. A car in a 30km/h zone could have in one case gone 28 km/h or in another 32 km/h. Both possibilities represent a case of a set of cases on the common case-space. A legal rule is, then, a partition of the case-space into whoever wins and whoever loses the case. However, where exactly the legal rule cuts across the case-space is determined by the judges' preferences towards the legal rule. As @laxNewJudicialPolitics2011 puts it, battles over law are struggles over partitions of the case space. The disposition of the case then refers to which party wins the case and results from the relationship between the judge's preferences towards the legal rule and the facts of the case.
+
+To be able to consistently estimate the location of CCC cases, they must all fall within the same case-space. In other words, they must be based on similar legal facts pertaining to similar legal rules that cut across the case-space. The development of caselaw overtime may for example shift the legal rule in any given case-space. It may be that with a precedent, the CCC sets a new standard for individual human rights review, which in all future cases makes the cases be more likely to disposed of in favor of the applicants, as has been the case with consumer cases for example. How does then inconsistency of caselaw occur?
 
 It is obvious that the real judicial adjudication is not as simple as a clear cut speeding rule. Typically, in order to resolve a case, the judges need to map the available evidence to the legal facts and then they have to select and interpret an appropriate legal rule to apply. Both processes are naturally subject to human judgment [@cameronChapterWhatJudges2017]. The indeterministic nature of this mapping opens up ways for disagreement. @landaDisagreementsCollegialCourts2007 draw multiple theoretical sources of disagreement from the case-space model. The first and clear source of disagreement among judges is that about facts. Different judges may place the facts of the case in the case-space differently. There are other sources of disagreement: which dimensions should be relevant under any given legal rule to determine the disposition of a case, disagreement about "thresholds" within dimensions, and a couple of more sources of disagreement, which all can be summarized as a disagreement about the legal rule. All these sources of disagreement may lead to inconsistency across judges and chambers. If one judge views the facts of the case differently from others, a different chamber composed of different judges may not reach the same conclusion given the same set of legally relevant facts. The same applies to judges' preferences over legal rules.
 
+While the issue of development of caselaw and of development its inconsistency over time has been raised in the context of SCOTUS, or in the comparison between differing courts, such as Germany's lower courts, we believe it to be equally applicable to collegial courts organised into multiple chambers, such as ECHR, CJEU or national apex (supreme and constitutional) courts. Therein, inconsistency can come about between the caselaw of different chambers of a collegial court. While works about caselaw consistency are typical doctrinal, presenting examples of mutually incompatible decisions, we study caselaw consistency empirically employing quantitative methods.
 
-
-For the sake of simplicity, the case-space is a uni-dimensional space, a line, with the specific case being a scalar on that dimension.
-
-To dispose of the case, the judge
-
-## Case-law consistency
-
-### Theoretical conceptualization and operationalization of case-law consistency
-
-We now move on to elucidating how we understand the term *consistency* of case-law or of *a court's application of the law* [@fjelstulHowChamberSystem2023, p. 2].
-Our understanding is firmly rooted in and builds upon the definition provided by Fjelstul in his theoretical study of the chamber system at the Court of Justice of the European Union (CJEU).
+## Case-law consistency {#consistency}
+We now move on to elucidating how we understand the term *consistency* of case-law or of *a court's application of the law* [@fjelstulHowChamberSystem2023, p. 2] Our understanding is firmly rooted in and builds upon the definition provided by Fjelstul in his theoretical study of the chamber system at the Court of Justice of the European Union (CJEU).
 Therein, Fjelstul theoretically conceptualizes *consistency* "as the degree to which the disposition of a case would change if it were decided by a different chamber" of a court.
 
 Fjelstul operationalizes the theoretical definition as "the variance of the distribution of the expected probability that the plaintiff wins a case across counterfactual chambers" [@fjelstulHowChamberSystem2023, p. 2] Put differently, an application of law before a court is consistent only if a court would reach the same conclusion in the same case with the same party, regardless of its composition or the deciding formation.
 
-In theory, both the theoretical definition and operationalization are counter-factual as we can never observe how any given decision would be decided by more than one actual court chamber.
-We can, however, attempt to measure the trend across general population of cases falling into one case-space.
-And while we are aware that comparison based on observational data is not conclusive of any causal relationship, our ambition is only to offer a descriptive analysis of the CCC's caselaw without necessarily uncovering any causal relationship in the sense of *what type of underlying feature leads to higher/lower consistency of CCC's caselaw?*
+In theory, both the theoretical definition and operationalization are counter-factual as we can never observe how any given decision would be decided by more than one actual court chamber. We can, however, attempt to measure the trend across general population of cases falling into one case-space. And while we are aware that comparison based on observational data is not conclusive of any causal relationship, our ambition is only to offer a descriptive analysis of the CCC's caselaw without necessarily uncovering any causal relationship in the sense of *what type of underlying feature leads to higher/lower consistency of CCC's caselaw?*
 
 Fjelstul’s operationalization of consistency assumes variation of chambers in a given point of time. Therefore, it also implicitly assumes that the legal situation is unchanged. If two chambers were to decide the same case at the same time differently, we might legitimately “see the judicial process as arbitrary or capricious” [@fjelstulHowChamberSystem2023, p. 2].
 
@@ -112,6 +86,7 @@ The interplay between the consistency of case law and a court's internal structu
 The CCC is widely regarded as one of the most powerful constitutional courts in the world [@kosarConstitutionalCourtCzechia2020, p. 143; but see @sipulovaCzechConstitutionalCourt2018, p. 56, concluding that this claim is not fully supported by empirical data]. It is made up of 15 justices who are divided into four 3-member senates (plus the President and two Vice Presidents). Similarly to SCOTUS, the justices are appointed by the president of the Czech Republic with the advice and consent of the Senate.
 The bulk of the CCC’s work is represented by individual constitutional complaints, which are, as a rule, decided upon by the senates; the judge rapporteur may declare certain complaints as inadmissible. The CCC decides in plenary sessions (*en banc*) mainly on review of primary and secondary legislation.
 The CCC rules in a form of a judgment (*nález*) and a decision in a narrow sense (*usnesení*). A vast majority of the CCC cases are decided in the form of decision. As a legal rule, the CCC must respect its own case law, but only in the form of judgment [@kosarConstitutionalCourtCzechia2020, p. 161-163]. A senate is obliged to submit a case to the plenary if it wants to overrule existing case law.
+
 From that follows that each 3-member senate might develop its “own” caselaw which will be binding to all state bodies including the CCC itself. In theory, this (mal)practice is restricted by the necessity (mentioned above) of submitting cases to the plenary. However, that requires certain level of diligence and discipline on the side of the senates. It also does not prevent the senate from developing whole “new” caselaw, distinguishing from earlier precedents if necessary.
 Justices may write dissenting and concurring opinions, but it is also possible to vote against the majority opinion without dissenting. From that follows that dissenting opinions (which are publicly available) are an incomplete indication of disagreement within the CCC. That is seen by most authors as a major methodological problem in the empirical research of the CCC justices [@smekalDeterminantsJudicialDecisionmaking2020, p. 126-127, @chmelCoOvlivnujeUstavni2021, p. 166, @vartazaryanSitovaAnalyzaDisentujicich2022, p. 1196-1197]. However, it can still be interfered from the “dissenting coalitions” that there was a clear division between two groups of justices in the CCC’s last decade [@vartazaryanSitovaAnalyzaDisentujicich2022, p. 1209-1211]. This division defies simple categorization along ideological lines but one possible explanation is that some justices are more activist in the sense of willingness to develop new case law [@chmelCoOvlivnujeUstavni2021, p. 162].
 
@@ -125,6 +100,25 @@ It can be assumed that the level of inconsistency may be related to the value-ba
 The area of restitutions is widely considered to be one of the most disputed legal-political issues after the 1989 Velvet Revolution related to transitional justice, appearing many times before the CCC [@biagiEuropeanConstitutionalCourts2020, p. 165-167]. It is also frequently mentioned as the prime example of CCC’s inconsistency [@bobekJudikaturaPravniArgumentace2013, p. 363; @vyhnanekJudikaturaUstavnimPravu2023]. Surprisingly, restitution litigation was not restricted to the 1990s, often spanning decades – the neverending presence of the issue also helped by the restitution of church property enacted only in 2012 after a heated political and legal debate.
 
 Vertical separation of powers is an issue where the CCC’s case law has evolved over time. The CCC has relaxed the limits placed on the legality of ordinances of territorial self-governing units (regions and municipalities) [@kosarConstitutionalCourtCzechia2020, p. 148]. Among the CCC justices, this issue remains controversial up to present time.
+
+## Locating court decisions {}
+Traditionally mainly American empirical legal science has long tried to estimate a position of judges or judicial decisions, especially in the context of political ideology of SCOTUS (Supreme Court of the United States) decisions and judges.
+Based on this estimation, the research sought to answer subsequent sociological research questions.
+Spaeth-Segal [@segalIdeologicalValuesVotes1995] and Martin-Quinn [@martinDynamicIdealPoint2002] scores are among the examples of attempts to quantify the ideological position of judgments or judges.
+However, these traditional estimation methods suffer from various shortcomings, such as measuring ideological positions indirectly (based on the party the decision was made against) or using data not available outside the American context (information about judges' voting) and, thus, making the research near impossible to replicate elsewhere.
+
+Recent developments in information technology enable more precise and diverse work with data, specifically with text of court decisions as data.
+This progress is starting to make its way into social and legal sciences outside the US as well, the first issue of the recently released European Journal on Empirical Studies proves this point [@bhupatirajuMappingGeometryLaw2024; @chauComputationalLegalStudies2024]. Two research teams have utilised the progress to overcome the aforementioned limitations in traditional estimation efforts of judicial decisions and judges' positions.
+
+Both models rest on the assumption that a location of a court decision can be estimated based on its relationship to other court decisions and sources of law.
+Courts typically justify their conclusion by reference to other court decisions or laws that are typically close to them in a case-space.
+Both teams make the following assumptions (a) each opinion has a fixed location along a single latent dimensions delimited by a common case-space and (b) they assume a proximity relationship, i.e. the probability of a (positive) reference to a court decision or other sources of law increases the closer the decisions are to each other in a case-space [@clarkLocatingSupremeCourt2010; @arnoldScalingCourtDecisions2023].
+
+The exact understanding of the relationship between a reference between two decisions and their position on the latent dimension can be understood in two manners.
+According to Clark and Lauderdale, *directional models* assume "that an opinion is more likely to cite a precedent if the precedent has the same [ideological] polarity as the opinion", whereas *proximity models* assume that "the probability of a positive citation from an opinion to a precedent decreases as the doctrine between the two opinions diverges." [@clarkLocatingSupremeCourt2010, p. 875].
+Both studies, upon which we build, ultimately base their model on the proximity model for it better reflects the assumed practice of citing court decisions: "Given the choice between two precedents with identical doctrine and differing directional outcomes, we believe that a justice in this situation would cite both precedents positively." [@clarkLocatingSupremeCourt2010, p. 875] Moreover, the proximity model better corresponds to the recent shift to model court decisions in a case-space. Thus, we do not diverge from the original studies.
+
+In the Czech legal system, there is not a precedent system *per se* comparable to the common law legal systems. However, the judges are still required to provide reasons for their judgments - often done in a way of citing other court decisions. The decision which legal sources to cite, which not to cite and how to cite them does not happen haphazardly. In line with the empirical studies on the role of precedent, we argue that the judges behave strategically in the sense that they care about the compliance with their decision. Second, the CCC judges find their decisions more persuasive if "legal consistency can be demonstrated across time and place". Third, the compliance with the CCC judgments is affected both by the lower courts' behavior as well as the other branches of power. Lastly, the embedding of decisions into the net of caselaw imputes time and effort costs on the CCC judges, who, therefore, have to make the decisions as to which cases to cite and which not to cite [@lupuPrecedentInternationalCourts2012]. Citing other CCC decisions enables the CCC justices to explain their conclusions and reasoning as well as to embed the decision within the network of other decisions. It also follows that not all references are the same: the judges can reference other decisions positively, whenever the cited decision and its reasoning is similar, and negative, whenever it is dissimilar.
 
 # Method
 Regarding the method, we employ a mix of quantitative methods (Bayesian statistics) and legal computational studies. First, we narrow down the selection of decisions to those falling under the given issues based on the subject matter index. With access to data from the Beck-online database, we can subsequently identify mutual citations in the Constitutional Court's case law. The data on mutual citations includes the information whether the citation was positive or negative (overruling, distinguishing). The prepared data are then fed into the Clark and Lauderdale's Bayesian model using the available code to replicate their research.
@@ -146,11 +140,91 @@ The feature selection of the two models is justified by the nature of typical ci
 
 @clarkLocatingSupremeCourt2010 also make use of data on the estimated ideology of the SCOTUS justices. We do not have such data as the CCC justices generally do not display such clear political positions. Additionally, the CCC is made up predominantly of appointees of the same president at any given time [@smekalDeterminantsJudicialDecisionmaking2020, p. 128]. However, we show that such data are not decisive for the model results.
 
+Our model merges both approaches. Instead of Poisson distributed citation counts as in @arnoldScalingCourtDecisions2023, for two reasons we employ Bernoulli distributed variable to capture whether certain legal source was cited or was not cited by a CCC decision. Firstly, we are able to narrow our data to include only positive citations in @clarkLocatingSupremeCourt2010 fashion. Secondly, as long as the citing behavior of different judge rapporteurs varies, the estimates may be biased. @arnoldScalingCourtDecisions2023 in their appendix posit that "Recording only whether a court refers to a legal source or not is quite a strong assumption. It seems much more realistic to also think about how often a court is citing a source. While a decision considers a dissenting legal source, it might refer to it only once or twice. But a legal source that is relevant will be referred to much more often." However, some CCC decisions cite a key source once and then proceed to interpret it in extensive fashion, others mention a certain legal source multiple times even within one paragraph. Therefore, we do not think that "recording only whether a court refers to a legal source" is that strong of an assumption within the CCC context. Especially given the fact that we are able to filter only those references that are truly positive and relevant for the decision.
+
+Therefore, our final model is as follows. We have a $i \times j$ decision-source matrix **Y**, where $Y_{ij}$ equals 1 if the opinion *i* positively cites a legal source *j* and 0 if it does not cite it at all. We use a Bernoulli distribution as the probability model for our citation data. Similarly to @arnoldScalingCourtDecisions2023 and @clarkLocatingSupremeCourt2010, the model rests on three assumptions: (1) Each decision *i* has a fixed location along a uni-dimensional space, (2) the decisions are more likely to positively refer to the same legal source the closer they are in the case-space^[Here we are not sure about the phrasing of the second assumption in @arnoldScalingCourtDecisions2023: "A written decision will refer to a legal source more often the closer their locations in this common case-space." As long as we are not placing the legal sources within the same case-space, which is not possible given that legal acts are not part of a case-space on the same level as cases but rather as the cut points through that case-space, then such an assumption does not make sense. Our assumption is more appropriate in the sense that it captures the essence of the model: if two decisions cite the same source, then they are likely to be closer to each other in the case-space.], and (3) each decision has a positive probability to refer to any legal source.^[We do not include the @clarkLocatingSupremeCourt2010 assumption that missing citations are missing at random. It should be the case that the manually annotated data from Beck should also include citations that the CCC may have forgotten to include. Even then the assumption would very likely hold.]. Where $\phi$ is the standard normal cumulative distribution function (i.e. a probit link), the probability of a decision *i* citing a legal source *j* is
+
+$$ Pr(Y_{ij} = 1|\alpha_j, \beta_i, \gamma, \theta_i, \phi_j) = Bernoulli(\Theta_{ij}) $$
+$$ \Theta_{ij} = \Phi(\alpha_j + \beta_i - \gamma||\theta_i - \phi_j||^2)$$
+Building on the aforediscussed IRT model of @barberaBirdsSameFeather2015 and of @arnoldScalingCourtDecisions2023, the parameters $\theta_i$ is the location of decision *i*, $\phi_j$ is the location of legal source *j*, $\alpha_j$ expresses the authority of legal source *j*, i.e. its propensity to be cited more or less likely than others in general due to its overall relevance, $\beta_i$ captures decision-specific differences.
+
 ## Data
 To apply the model, we used data from the CCC database [@paulikCzechConstitutionalCourt2024] and metadata provided by the Beck-online database. The official CCC database *NALUS*^[Available at: https://nalus.usoud.cz/] consists of the texts of all CCC decisions and accompanying metadata (such as dates, judge rapporteur, registry items, relevant legal provisions).
  
 To identify relations between the decisions, we use metadata that was kindly provided by the Czech legal information system *Beck-online*^[Available at: https://www.beck-online.cz/] owned by the C. H. Beck publishing house. In this respect, we follow the approach of both @clarkLocatingSupremeCourt2010 (using Shepard’s citation data) and @arnoldScalingCourtDecisions2023 (using data by the German legal database Juris). Beck-online captures court decisions cited by another decision, together with the “quality” of the citation, i.e. capturing the court’s treatment of the decision cited. This type of metadata is similar to *Shepard's Citations* used by the U.S. legal databases but pretty rare in the European markets.
 
-Beck-online uses a total of eight types of quality (in addition, some citations may not be annotated with quality yet); these are displayed to users in the metadata of the citing and cited decision. Citation metadata capture only decisions cited by the court itself and only as a part of court’s argumentation. That approach excludes decisions mentioned solely by parties or in procedural context only. One type of quality indicates that the decision is cited by a dissenting (or concurring) opinion, which leaves us with seven qualities describing the attitude of the majority opinion. To simplify the input data in the vein of Clark and Lauderdale, we flatten these seven qualities into two: positive or negative.
+Beck-online uses a total of eight types of quality (^[in addition, some citations may not be annotated with quality yet)] similar to the Shepard's typology (@spriggsMeasuringLegalChange2000, p. 330); these are displayed to users in the metadata of the citing and cited decision. Citation metadata capture only decisions cited by the court itself and only as a part of court’s argumentation. That approach excludes decisions mentioned solely by parties or in procedural context only. One type of quality indicates solely that the decision is cited by a dissenting (or concurring) opinion, which leaves us with seven substantive qualities describing the attitude of the majority opinion. To simplify the input data in the vein of Clark and Lauderdale, as well as other scholars (cf. @spriggsMeasuringLegalChange2000, p. 335), we flatten these seven qualities into two: positive or negative.
+Consistently with the Shepard's approach (cf. @spriggsMeasuringLegalChange2000, p. 331) we decided to code Distinguished quality as negative treatment. The reasons were twofold: first, it helped with the small share of negative citations in the dataset. Second, distinguishing can be a way of getting past uncomfortable caselaw without disagreeing with it explicitly. In that respect, distinguishing is often a concealed rejection.
+
+When making the decision which data to include we faced the issue of legal reforms having taken place in Czechia. Because the data on GDR, for example, spans a long time, the uderlying laws have developed and with it the references the CCC makes. Therefore, for the subjects that spans longer time, we exclude references to laws. In contrast to that, the caselaw on consumer concerns only the 3rd term of the CCC. Therein, it makes sense to include references to law as well. As the model run on all cases on custody shows, the shift in the location of the decisions corresponds to adoption of the 2012 civil code, which regulates the custody. Practically all decisions thereafter fall to the one side of 0, whereas the old decisions fall to the other. Therefore, if the subject at question spans longer time in which legal reforms had taken place, it is not possible to rely on data on legal acts in the model because. Otherwise the model captures the legal reforms rather than caselaw development. Fig. \@ref(fig:custody) reveals the sensitivity of the model to legal reforms. The red ver
+tical line indicates the first decision that has been made after the 2012 civil code came into force. Therefore, it makes sense to always rerun the model on the subset of data, if the suspision is raised that it captures legal reforms rather than shift in caselaw.
+
+```{r custody}
+model_custody = targets::tar_read(fitted_model_custody, store = "../_targets/")
+
+model_custody |>
+  ggplot(mapping = aes(x = doc_id, y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +
+  coord_flip()  +
+  geom_vline(xintercept = which(levels(factor(model_custody$case)) == "ECLI:CZ:US:2012:2.US.3765.11.2"), linetype="dashed", color = "red") +
+  labs(y = "Estimated location of a decision",
+       x = NULL)
+```
+
+Even if we control for the legal reforms, we seem to capture the underlying legal topic. In other words, just using simple metadata of the CCC decisins, we are not able to narrow down the case-space sufficiently. To test that and to potentially narrow down the case space, we employ a similar method to @arnoldScalingCourtDecisions2023. @arnoldScalingCourtDecisions2023 convert the titles of a couple of pre-selected decisions into tf-idf and find the most similar decisions using cosine similarity to delimit the case-space as narrowly as possible. The results of running to model on customer cases reveal that there are four decisions to the left of 0. We convert the popular names of these four decision as well as the other 7000 decisions that have a popular name into dense doc2vec vectors [@leDistributedRepresentationsSentences2014], which is a more modern method to represent text as a vector than the tf-idf matrix based on the bag-of-words approaches. 
+
+```{r fig.cap = "The results of the fitted model on the customer cases. The four decisions with significant theta < 0 are highlighted."}
+negative_cases = targets::tar_read(fitted_model_spotr, store = "../_targets/") |>
+  filter(sign(higher) == sign(lower)) |>
+  filter(theta > 0)
+
+targets::tar_read(fitted_model_spotr, store = "../_targets/") |>
+  ggplot(mapping = aes(x = doc_id, y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +
+  coord_flip()  +
+  labs(y = "Estimated location of a decision",
+       x = NULL) +
+  gghighlight::gghighlight(doc_id %in% negative_cases$doc_id)
+```
+
+The results from finding the most similar decisions based on the cosine similarity of the doc2vec vector representations of the popular titles of decisions reveal that the 3 closest decisions to either of the four highlighted decisions are the remaining three decisions. Therefore, simply inputting all cases tagged with the customer tag in the CCC database does not suffice to delimit the case-space, on which the model would be able to capture caselaw consistency. @mohammadiCombiningTopicModelling2024 have indeed found that citation networks can be used to improve topic modelling of caselaw of the European Court of Human Rights.
+
+```{r}
+cosine_sim_spotr = read_rds("../data/cosine_sim_spotr.rds") 
+cosine_sim_spotr |>
+  select(-term1) |>
+  kable(col.names = c("Case", "Similarity",  "Rank"),
+        booktabs = T,
+        digits = 3,
+        caption = "A table showing the 10 most cosine similar cases to the four statistically significant customer law cases whose position was estimated to be negative. The highlighted rows are those, in which the most similar decision was one of the other three from the four.") |>
+  pack_rows(index = table(fct_inorder(cosine_sim_spotr$term1))) |>
+  row_spec(which(cosine_sim_spotr$term2 %in% cosine_sim_spotr$term1), bold = T, color = "white", background = "gray")
+```
+
+However, when we apply the model to the subsetted data of the four decisions that according to the filtering based on the cosine similarity fall within the same case-space, we find that the cases seem to be consistent. None of the decisions is statistically significantly different from 0. Therefore, the conclusion would be that there is no inconsistency among the decisions. A close reading of the four decisions indeed corroborates the model's conclusion. All four decisions have been granted on similar grounds and concern the usage of evidence in proceedigns concerning compensation for non-pecuniary damage for a delayed flight. We argue that in this narrowly constructed case-space, the model correctly captures the consistency of CCC caselaw.
+
+The subset of data on the generally binding regulation contains `r nrow(data_ozv)` unique citing decisions and `r ncol(data_ozv)`. 
 
 # Results
+
+## The generally binding regulations
+Out of the `r nrow(data_ozv)` decisions that were fed into the model, `r ` were estimated as significantly different from 0 as their 95 % credible intervals did not cross 0. Fig. \@ref(fig:overview-gdr) presents the estimates of the location of the decision.
+
+```{r overview-gdr, fig.cap = "Overview of estimated positions of all the GBR decisions."}
+fitted_model_ozv |>
+  ggplot(mapping = aes(x = doc_id, y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +
+  coord_flip()  +
+  labs(y = "Estimated location of a decision",
+       x = NULL)
+```
+We used the cosine similarity method to verify whether the model does not capture an underlying difference in topics. Table \@ref(tab:gdb-topics) shows that that is not the case. 
+
+We can observe that the average position of cases shifts around XXXX. In the Czech legal scholarship, the case XXX is considered to be the landmark case that heavily shifted the CCC caselaw in the field of generally binding resolutions. [POPIS TOHO, JAK TO VYPADALO V 90. A JAK SE JUDIKATURA ZMENILA PAK]. A closer look at the fig. \@ref(fig:overview-gdr) reveals that the shift in the caselaw may have happened earlier. The landmark decision [SPZN] is highlighted. The shift precedes the landmark decision by a little bit.
+
+
+
+We thus posit that shifts in the precedent do not occur at once. Rather, landmark decision confirms a gradual process that had already ongoing for certain amount of time.
+
+
+

@@ -23,11 +23,6 @@ subject_matter_data = map(.x = subject_matters, ~filter(.data = metadata, subjec
 file = "data/US_Cituje_old.xlsx"
 data_location = "../data/2b_model/"
 
-# cases = read_rds("../data/ccc_database/rds/ccc_metadata.rds") |>
-#   select(doc_id, case_id, date_decision) |>
-#   filter(doc_id %in% cases$doc_id) |>
-#   left_join(read_rds("../data/ccc_database/rds/ccc_texts.rds"))
-
 data = readxl::read_xlsx(file) |>
   rename(citing_doc_id = "Sp. zn.",
          citing_date_decision = "Ze dne",
@@ -56,7 +51,7 @@ data = readxl::read_xlsx(file) |>
 
 data_subject_matter = list()
 data_subject_matter$names = subject_matters
-data_subject_matter$data = map(.x = subject_a matter_data, ~data %>% # OPRAVIT
+data_subject_matter$data = map(.x = subject_matter_data, ~data %>% # OPRAVIT
                                       filter(citing_doc_id %in% .x$case_id) %>%
                                       left_join(., .x, by = join_by(citing_doc_id == case_id, citing_date_decision == date_decision)) %>%
                                       mutate(citing_doc_id = doc_id) %>%
@@ -420,7 +415,7 @@ fit_model = function(data){
 
 start.time <- Sys.time()
 plan(multisession, workers = parallel::detectCores() - 2)
-new_data1 = map(subject_matters_to_filter[1:10], ~subset_data(data = data, subject = .x) |>
+new_data1 = map(subject_matters_to_filter[1], ~subset_data(data = data, subject = .x) |>
                         reshape_data() |>
                  fit_model(), .progress = T)
 end.time <- Sys.time()
