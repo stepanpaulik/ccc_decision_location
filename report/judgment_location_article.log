@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.21)  29 AUG 2024 21:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.21)  25 SEP 2024 14:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -579,17 +579,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (./judgment_location_article.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 3.
-)
-\tf@toc=\write3
-\openout3 = `judgment_location_article.toc'.
-
 
 
 [1
 
-{/Users/stepanpaulik/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
-
-LaTeX Warning: Hyper reference `estimation' on page 2 undefined on input line 165.
+{/Users/stepanpaulik/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}])
+\tf@toc=\write3
+\openout3 = `judgment_location_article.toc'.
 
 
 
@@ -605,69 +601,84 @@ LaTeX Warning: Hyper reference `estimation' on page 2 undefined on input line 16
 
 [7]
 
-[8{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[8]
 
-[9]
+[9{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
 [10]
 
-LaTeX Warning: Reference `fig:custody' on page 11 undefined on input line 279.
+[11]
 
-<judgment_location_article_files/figure-latex/custody-1.pdf, id=236, 458.71375pt x 315.1775pt>
+LaTeX Warning: Reference `fig:custody' on page 12 undefined on input line 289.
+
+<judgment_location_article_files/figure-latex/custody-1.pdf, id=251, 458.71375pt x 316.18124pt>
 File: judgment_location_article_files/figure-latex/custody-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/custody-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/custody-1.pdf  used on input line 282.
-(pdftex.def)             Requested size: 458.73363pt x 315.19115pt.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/custody-1.pdf  used on input line 291.
+(pdftex.def)             Requested size: 458.73363pt x 316.19493pt.
 
 
-[11]
-<judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf, id=244, 458.71375pt x 313.17pt>
+[12]
+
+[13 <./judgment_location_article_files/figure-latex/custody-1.pdf>]
+<judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf, id=275, 458.71375pt x 313.17pt>
 File: judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf  used on input line 288.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf  used on input line 328.
 (pdftex.def)             Requested size: 458.72662pt x 313.17877pt.
 
-LaTeX Warning: Float too large for page by 74.81554pt on input line 352.
+LaTeX Warning: Float too large for page by 74.81554pt on input line 392.
 
 
-
-[12 <./judgment_location_article_files/figure-latex/custody-1.pdf>]
-
-[13 <./judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf>]
 
 [14]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 362.
-(/Users/stepanpaulik/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 
-LaTeX Warning: Reference `fig:overview-gdr' on page 15 undefined on input line 362.
-
-<judgment_location_article_files/figure-latex/overview-gdr-1.pdf, id=282, 458.71375pt x 315.1775pt>
-File: judgment_location_article_files/figure-latex/overview-gdr-1.pdf Graphic file (type pdf)
-<use judgment_location_article_files/figure-latex/overview-gdr-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/overview-gdr-1.pdf  used on input line 364.
-(pdftex.def)             Requested size: 458.73363pt x 315.19115pt.
-
-LaTeX Warning: Reference `tab:gdb-topics' on page 15 undefined on input line 365.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 364--366
-[][]
- []
-
-
-LaTeX Warning: Reference `fig:overview-gdr' on page 15 undefined on input line 367.
-
-
-
-[15 <./judgment_location_article_files/figure-latex/overview-gdr-1.pdf>]
+[15 <./judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf>]
 
 [16]
+<judgment_location_article_files/figure-latex/overview-gdr-1.pdf, id=307, 458.71375pt x 313.17pt>
+File: judgment_location_article_files/figure-latex/overview-gdr-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/overview-gdr-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/overview-gdr-1.pdf  used on input line 402.
+(pdftex.def)             Requested size: 458.72662pt x 313.17877pt.
 
-[17]
+LaTeX Warning: Reference `tab:gdb-topics' on page 17 undefined on input line 406.
 
-[18] (./judgment_location_article.aux)
+
+
+[17 <./judgment_location_article_files/figure-latex/overview-gdr-1.pdf>]
+<judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf, id=326, 451.6875pt x 300.12125pt>
+File: judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf  used on input line 423.
+(pdftex.def)             Requested size: 451.71394pt x 300.13882pt.
+
+
+[18]
+
+[19 <./judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf>]
+<judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf, id=350, 459.7175pt x 313.17pt>
+File: judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf  used on input line 435.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+
+
+[20 <./judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf>]
+<judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf, id=366, 452.69125pt x 313.17pt>
+File: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf  used on input line 447.
+(pdftex.def)             Requested size: 452.69014pt x 313.16922pt.
+
+
+[21 <./judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>]
+
+[22]
+
+[23]
+
+[24] (./judgment_location_article.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -677,18 +688,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 13729 strings out of 475539
- 218316 string characters out of 5776149
- 1957957 words of memory out of 5000000
- 36030 multiletter control sequences out of 15000+600000
- 624809 words of font info for 86 fonts, out of 8000000 for 9000
+ 13737 strings out of 475539
+ 219712 string characters out of 5776149
+ 1955957 words of memory out of 5000000
+ 36022 multiletter control sequences out of 15000+600000
+ 624490 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 83i,12n,93p,2150b,513s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on judgment_location_article.pdf (18 pages, 393543 bytes).
+ 83i,12n,93p,2137b,525s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on judgment_location_article.pdf (24 pages, 415199 bytes).
 PDF statistics:
- 474 PDF objects out of 1000 (max. 8388607)
- 410 compressed objects within 5 object streams
- 76 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 568 PDF objects out of 1000 (max. 8388607)
+ 491 compressed objects within 5 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 135 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -13,7 +13,7 @@ project.seed = 1337L
 # data = tar_read(data_input_spotr)
 
 # DATA WRANGLING  ---------------------------------------------------------
-fit_model = function(data, iterations = 40000, model = "bernoulli"){
+fit_model = function(data, iterations = 40000, model = "bernoulli", metadata){
   if(is.null(data)) return(NULL)
   
   median_over_param_list <- function(param_list) {
@@ -258,6 +258,9 @@ fit_model = function(data, iterations = 40000, model = "bernoulli"){
     theta = apply(draws$theta, 2, median)*inverter,
     higher =  apply(draws$theta, 2, high.bound)*inverter,
     lower = apply(draws$theta, 2, low.bound)*inverter
-  )
+  ) |>
+    left_join(read_rds(metadata) |>
+                select(doc_id, case_id, popular_name, subject_register, outcome, grounds, date_decision) |> 
+                mutate(subject_register = as.character(subject_register)))
   return(data_output)
 }

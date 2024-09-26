@@ -2,7 +2,7 @@ library(tidyverse)
 library(readxl)
 
 
-# cases = tar_read(cases_spotr)
+# cases = tar_read(cases_consumer)
 # metadata = "../data/ccc_database/rds/ccc_metadata.rds"
 # texts = "../data/ccc_database/rds/ccc_texts.rds"
 # file_subject_matter = "../data/ccc_database/rds/ccc_subject_matter.rds"
@@ -55,10 +55,10 @@ subset_data = function(file, file_subject_matter = subject_matter, year = NULL, 
   }
   
   output = output |>
-    select(doc_id, case_id, date_decision, case_nr) |>
-    mutate(case_id = case_when(case_nr > 1 ~ paste0(case_id, "-", case_nr),
-                               .default = case_id)) |>
-    select(-case_nr)
+    select(doc_id, case_id, date_decision)
+    # mutate(case_id = case_when(case_nr > 1 ~ paste0(case_id, "-", case_nr),
+    #                            .default = case_id)) |>
+    # select(-case_nr)
   
 
   
