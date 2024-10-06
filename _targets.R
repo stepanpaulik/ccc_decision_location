@@ -41,14 +41,14 @@ list(
   tar_target(data_ozv, transform_data(cases = cases_ozv, file = input, metadata = metadata, texts = texts, acts = NULL)),
   tar_target(data_oop, transform_data(cases = cases_oop, file = input, metadata = metadata, texts = texts, acts = acts)),
   tar_target(data_consumer, transform_data(cases = cases_consumer, file = input, metadata = metadata, texts = texts, acts = acts)),
-  tar_target(data_consumer_delays, {
+  tar_target(data_consumer_wodelays, {
     model_consumer = fitted_model_consumer
     filtered_ids = model_consumer |>
       filter(sign(higher) == sign(lower)) |>
       filter(sign(higher) < 0) |>
       pull(doc_id)
     
-    cases =cases_consumer |>
+    cases = cases_consumer |>
       filter(!doc_id %in% filtered_ids) |>
       transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
   }
@@ -62,22 +62,21 @@ list(
     
     cases_consumer |>
       filter(doc_id %in% filtered_ids) |>
-      transform_data(file = input, metadata = metadata, texts = texts, acts = NULL)
+      transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
   }
   ),
   tar_target(data_consumer_ldgm, {
-    model_consumer = fitted_model_consumer
+    model_consumer = fitted_model_consumer_wodelays
     filtered_ids = model_consumer |>
       filter(sign(higher) == sign(lower)) |>
-      filter(higher > 0) |>
       pull(doc_id)
     
     cases_consumer |>
-      filter(!doc_id %in% filtered_ids) |>
+      filter(doc_id %in% filtered_ids) |>
       left_join(read_rds(metadata) |> select(doc_id, popular_name)) |>
-      filter(!str_detect(popular_name, "rozhodčí")) |>
+      # filter(!str_detect(popular_name, "rozhodčí")) |>
       select(doc_id, case_id, date_decision) |>
-      transform_data(file = input, metadata = metadata, texts = texts, acts = NULL)
+      transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
   }
   ),
   tar_target(data_consumer_gm, {
@@ -86,16 +85,28 @@ list(
       mutate(subject_register = as.character(subject_register)) |>
       filter(str_detect(subject_register, "dobré mravy")) |>
       select(doc_id, case_id, date_decision) |>
-      transform_data(file = input, metadata = metadata, texts = texts, acts = NULL)
+      transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
   }
   ),
-  tar_target(data_consumer_rest, {
+  tar_target(data_consumer_gm_cosine, {
+    rbind(cases_consumer |>
+            left_join(read_rds(metadata) |> select(doc_id, subject_register)) |>
+            mutate(subject_register = as.character(subject_register)) |>
+            filter(str_detect(subject_register, "dobré mravy")) |>
+            select(doc_id, case_id, date_decision),
+          cases_consumer |> filter(doc_id == "ECLI:CZ:US:2018:4.US.3009.17.2") |>
+            select(doc_id, case_id, date_decision)
+    ) |> 
+      transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
+  }
+  ),
+  tar_target(data_consumer_ld, {
     cases_consumer |>
-      left_join(read_rds(metadata) |> select(doc_id, subject_register)) |>
+      left_join(read_rds(metadata) |> select(doc_id, popular_name, subject_register)) |>
       mutate(subject_register = as.character(subject_register)) |>
-      filter(str_detect(subject_register, "dobré mravy")) |>
+      filter(str_detect(popular_name, "dálku")) |>
       select(doc_id, case_id, date_decision) |>
-      transform_data(file = input, metadata = metadata, texts = texts, acts = NULL)
+      transform_data(file = input, metadata = metadata, texts = texts, acts = acts)
   }
   ),
   tar_target(data_investigation_article, {
@@ -126,10 +137,12 @@ list(
   tar_target(data_input_ozv, reshape_data(data_ozv, filtered = TRUE)),
   tar_target(data_input_oop, reshape_data(data_oop, filtered = TRUE)),
   tar_target(data_input_consumer, reshape_data(data_consumer, filtered = TRUE)),
-  tar_target(data_input_consumer_delays, reshape_data(data_consumer_delays, filtered = TRUE)),
+  tar_target(data_input_consumer_wodelays, reshape_data(data_consumer_wodelays, filtered = TRUE)),
   tar_target(data_input_consumer_onlydelays, reshape_data(data_consumer_onlydelays, filtered = TRUE)),
   tar_target(data_input_consumer_ldgm, reshape_data(data_consumer_ldgm, filtered = TRUE)),
   tar_target(data_input_consumer_gm, reshape_data(data_consumer_gm, filtered = TRUE)),
+  tar_target(data_input_consumer_gm_cosine, reshape_data(data_consumer_gm_cosine, filtered = TRUE)),
+  tar_target(data_input_consumer_ld, reshape_data(data_consumer_ld, filtered = TRUE)),
   tar_target(data_input_investigation, reshape_data(data_investigation, filtered = TRUE)),
   tar_target(data_input_investigation_article, reshape_data(data_investigation_article, filtered = TRUE)),
   tar_target(data_input_investigation_article_3rdterm, reshape_data(data_investigation_article_3rdterm, filtered = TRUE)),
@@ -142,9 +155,11 @@ list(
   # tar_target(fitted_model_oop, fit_model(data = data_input_oop, metadata = metadata)),
   tar_target(fitted_model_consumer, fit_model(data = data_input_consumer, metadata = metadata)),
   tar_target(fitted_model_consumer_onlydelays, fit_model(data = data_input_consumer_onlydelays, metadata = metadata)),
-  tar_target(fitted_model_consumer_delays, fit_model(data = data_input_consumer_delays, metadata = metadata)),
+  tar_target(fitted_model_consumer_wodelays, fit_model(data = data_input_consumer_wodelays, metadata = metadata)),
   tar_target(fitted_model_consumer_ldgm, fit_model(data = data_input_consumer_ldgm, metadata = metadata)),
   tar_target(fitted_model_consumer_gm, fit_model(data = data_input_consumer_gm, metadata = metadata)),
+  tar_target(fitted_model_consumer_gm_cosine, fit_model(data = data_input_consumer_gm_cosine, metadata = metadata)),
+  tar_target(fitted_model_consumer_ld, fit_model(data = data_input_consumer_ld, metadata = metadata)),
   # tar_target(fitted_model_investigation, fit_model(data = data_input_investigation, metadata = metadata)),
   tar_target(fitted_model_investigation_article, fit_model(data = data_input_investigation_article, metadata = metadata)),
   tar_target(fitted_model_investigation_article_3rdterm, fit_model(data = data_input_investigation_article_3rdterm, metadata = metadata))

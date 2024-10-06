@@ -11,41 +11,22 @@ library(patchwork)
 #   left_join(read_rds("../data/ccc_database/rds/ccc_metadata.rds") |> select(doc_id, popular_name, subject_register, subject_proceedings) |> mutate(across(everything(), as.character)), by = join_by(doc_id == doc_id)) |>
 #   mutate(consumer = if_else(str_detect(subject_register, "spotřebitel"), 1, 0))
 
-# OZV ---------------------------------------------------------------------
-cases_ozv = tar_read(cases_ozv)
-data_ozv = tar_read(data_ozv)
-
-model_ozv = tar_read(fitted_model_ozv)
-
-# write_rds(model_ozv, "data/model_ozv.rds")
-
-plot_ozv = model_ozv |>
-  ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
-  geom_pointrange(aes(ymin = lower, ymax = higher)) +
-  coord_flip()  +
-  geom_vline(xintercept = "Pl.ÚS 45/06", linetype="dashed", color = "purple") +
-  labs(y = "Estimated location of a decision",
-       x = NULL,
-       title = "Overview of all decisions")
-plot_ozv
-
-significant_ozv = model_ozv |>
-  filter(sign(higher) == sign(lower))
-
-# SPOTREBITEl -------------------------------------------------------------
+# CONSUMER -------------------------------------------------------------
 cases_consumer = tar_read(cases_consumer)
 
 data_consumer = tar_read(data_consumer)
 data_consumer_onlydelays = tar_read(data_consumer_onlydelays)
-data_consumer_delays = tar_read(data_consumer_delays)
+data_consumer_wodelays = tar_read(data_consumer_wodelays)
 data_consumer_ldgm = tar_read(data_consumer_ldgm)
 data_consumer_gm = tar_read(data_consumer_gm)
+data_consumer_ld = tar_read(data_consumer_ld)
 
 model_consumer = tar_read(fitted_model_consumer)
 model_consumer_onlydelays = tar_read(fitted_model_consumer_onlydelays) 
-model_consumer_delays = tar_read(fitted_model_consumer_delays)
+model_consumer_wodelays = tar_read(fitted_model_consumer_wodelays)
 model_consumer_ldgm = tar_read(fitted_model_consumer_ldgm)
 model_consumer_gm = tar_read(fitted_model_consumer_gm)
+model_consumer_ld = tar_read(fitted_model_consumer_ld)
 
 result_consumer = model_consumer |>
   filter(sign(higher) == sign(lower))
@@ -55,9 +36,9 @@ result_consumer_onlydelays = model_consumer_onlydelays |>
   filter(sign(higher) == sign(lower))
 result_consumer_onlydelays
 
-result_consumer_delays = model_consumer_delays |>
+result_consumer_wodelays = model_consumer_wodelays |>
   filter(sign(higher) == sign(lower))
-result_consumer_delays
+result_consumer_wodelays
 
 result_consumer_ldgm = model_consumer_ldgm |>
   filter(sign(higher) == sign(lower))
@@ -66,6 +47,10 @@ result_consumer_ldgm
 result_consumer_gm = model_consumer_gm |>
   filter(sign(higher) == sign(lower))
 result_consumer_gm
+
+result_consumer_ld = model_consumer_ld |>
+  filter(sign(higher) == sign(lower))
+result_consumer_ld
 # output_consumer = model_consumer |>
 #   left_join(read_rds("../data/ccc_database/rds/ccc_compositions.rds"), by = join_by(doc_id == doc_id))
 # 
@@ -94,11 +79,22 @@ plot_consumer_onlydelays = model_consumer_onlydelays |>
        x = NULL)
 
 plot_consumer_all_onlydelays = plot_consumer_all + plot_consumer_onlydelays + plot_annotation(tag_levels = 'A')
+plot_consumer_all_onlydelays
+
+plot_consumer_wodelays = model_consumer_wodelays |>
+  ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +  
+  gghighlight(sign(higher) == sign(lower)) +
+  geom_hline(yintercept = 0, linetype="dashed", color = "purple") +
+  coord_flip()  +
+  labs(y = "Estimated location of a decision",
+       x = NULL)
+plot_consumer_wodelays
 
 plot_consumer_ldgm = model_consumer_ldgm |>
   ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
   geom_pointrange(aes(ymin = lower, ymax = higher)) +
-  gghighlight(sign(higher) == sign(lower) & sign(higher) == -1) +
+  gghighlight(sign(higher) == sign(lower)) +
   geom_hline(yintercept = 0, linetype="dashed", color = "purple") +
   coord_flip()  +
   labs(y = "Estimated location of a decision",
@@ -112,7 +108,23 @@ plot_consumer_gm = model_consumer_gm |>
   labs(y = "Estimated location of a decision",
        x = NULL)
 
-plot_consumer_ldgm_combined = plot_consumer_ldgm + plot_consumer_gm + plot_annotation(tag_levels = 'A')
+tar_read(fitted_model_consumer_gm_cosine) |>
+  ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +  
+  geom_hline(yintercept = 0, linetype="dashed", color = "purple") +
+  coord_flip()  +
+  labs(y = "Estimated location of a decision",
+       x = NULL)
+
+plot_consumer_ld = model_consumer_ld |>
+  ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +  
+  geom_hline(yintercept = 0, linetype="dashed", color = "purple") +
+  coord_flip()  +
+  labs(y = "Estimated location of a decision",
+       x = NULL)
+
+plot_consumer_ldgm_combined = plot_consumer_wodelays + plot_consumer_gm + plot_consumer_ld + plot_annotation(tag_levels = 'A')
 plot_consumer_ldgm_combined
 
 # output_consumer |> 
@@ -167,21 +179,21 @@ plot_winrate_consumer
 
 
 
-model_consumer_fe = feglm(
+model_consumer_winrate_fe = feglm(
   fml = outcome ~ 1 | judge_rapporteur_name,
   data = data_winrate_consumer,
   # cluster = "formation",
   family = "binomial"
 )
 
-model_consumer = feglm(
+model_consumer_winrate = feglm(
   fml = outcome ~ 1 + judge_rapporteur_name,
   data = data_winrate_consumer,
   # cluster = "formation",
   family = "binomial"
 )
 
-coef_df  = as.data.frame(summary(model_consumer)$coeftable) |>
+coef_df  = as.data.frame(summary(model_consumer_winrate)$coeftable) |>
   mutate(exp_coef = exp(Estimate)) |>
   rownames_to_column() |>
   mutate(rowname = str_remove(rowname, pattern = "judge_rapporteur_name"))
@@ -198,7 +210,7 @@ coef_df |>
 
 
 modelsummary::modelsummary(
-  model_consumer,
+  model_consumer_winrate,
   estimate = "{estimate}{stars}",
   statistic = "{p.value} [{conf.low}, {conf.high}]",
   exponentiate = TRUE,
@@ -206,7 +218,29 @@ modelsummary::modelsummary(
 
 
 
-plot(fixef(model_consumer_fe))
+plot(fixef(model_consumer_winrate_fe))
+
+# OZV ---------------------------------------------------------------------
+cases_ozv = tar_read(cases_ozv)
+data_ozv = tar_read(data_ozv)
+
+model_ozv = tar_read(fitted_model_ozv)
+
+# write_rds(model_ozv, "data/model_ozv.rds")
+
+plot_ozv = model_ozv |>
+  ggplot(mapping = aes(x = reorder(case_id, date_decision), y = theta)) +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) +
+  coord_flip()  +
+  geom_pointrange(aes(ymin = lower, ymax = higher)) + 
+  geom_vline(xintercept = "Pl.ÚS 45/06", linetype="dashed", color = "purple") +
+  labs(y = "Estimated location of a decision",
+       x = NULL,
+       title = "Overview of all decisions")
+plot_ozv
+
+result_ozv = model_ozv |>
+  filter(sign(higher) == sign(lower))
 
 
 # INVESTIGATION -----------------------------------------------------------

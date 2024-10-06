@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.21)  25 SEP 2024 14:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.21)  6 OCT 2024 16:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,76 +609,82 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [11]
 
-LaTeX Warning: Reference `fig:custody' on page 12 undefined on input line 289.
+LaTeX Warning: Reference `fig:custody' on page 12 undefined on input line 295.
 
-<judgment_location_article_files/figure-latex/custody-1.pdf, id=251, 458.71375pt x 316.18124pt>
+<judgment_location_article_files/figure-latex/custody-1.pdf, id=256, 458.71375pt x 316.18124pt>
 File: judgment_location_article_files/figure-latex/custody-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/custody-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/custody-1.pdf  used on input line 291.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/custody-1.pdf  used on input line 297.
 (pdftex.def)             Requested size: 458.73363pt x 316.19493pt.
 
 
 [12]
 
 [13 <./judgment_location_article_files/figure-latex/custody-1.pdf>]
-<judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf, id=275, 458.71375pt x 313.17pt>
-File: judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<use judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf  used on input line 328.
-(pdftex.def)             Requested size: 458.72662pt x 313.17877pt.
-
-LaTeX Warning: Float too large for page by 74.81554pt on input line 392.
-
-
-
-[14]
-
-[15 <./judgment_location_article_files/figure-latex/unnamed-chunk-1-1.pdf>]
-
-[16]
-<judgment_location_article_files/figure-latex/overview-gdr-1.pdf, id=307, 458.71375pt x 313.17pt>
+<judgment_location_article_files/figure-latex/overview-gdr-1.pdf, id=280, 458.71375pt x 313.17pt>
 File: judgment_location_article_files/figure-latex/overview-gdr-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/overview-gdr-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/overview-gdr-1.pdf  used on input line 402.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/overview-gdr-1.pdf  used on input line 334.
 (pdftex.def)             Requested size: 458.72662pt x 313.17877pt.
 
-LaTeX Warning: Reference `tab:gdb-topics' on page 17 undefined on input line 406.
+LaTeX Warning: Reference `tab:gdb-topics' on page 14 undefined on input line 338.
 
 
 
-[17 <./judgment_location_article_files/figure-latex/overview-gdr-1.pdf>]
-<judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf, id=326, 451.6875pt x 300.12125pt>
+[14 <./judgment_location_article_files/figure-latex/overview-gdr-1.pdf>]
+
+[15]
+
+LaTeX Warning: Float too large for page by 91.43304pt on input line 411.
+
+<judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf, id=306, 451.6875pt x 300.12125pt>
 File: judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf  used on input line 423.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf  used on input line 419.
 (pdftex.def)             Requested size: 451.71394pt x 300.13882pt.
+<judgment_location_article_files/figure-latex/consumer-ldgm-1.pdf, id=309, 458.71375pt x 300.12125pt>
+File: judgment_location_article_files/figure-latex/consumer-ldgm-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/consumer-ldgm-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/consumer-ldgm-1.pdf  used on input line 427.
+(pdftex.def)             Requested size: 458.73363pt x 300.13425pt.
 
 
-[18]
+[16]
 
-[19 <./judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf>]
-<judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf, id=350, 459.7175pt x 313.17pt>
+[17]
+
+[18 <./judgment_location_article_files/figure-latex/consumer-all-delays-1.pdf>]
+
+[19 <./judgment_location_article_files/figure-latex/consumer-ldgm-1.pdf>]
+<judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf, id=356, 452.69125pt x 313.17pt>
+File: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf Graphic file (type pdf)
+<use judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>
+Package pdftex.def Info: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf  used on input line 441.
+(pdftex.def)             Requested size: 452.69014pt x 313.16922pt.
+
+LaTeX Warning: Reference `fig:cosine-sim-consumer-gm' on page 20 undefined on input line 449.
+
+
+
+[20 <./judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>]
+<judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf, id=374, 459.7175pt x 313.17pt>
 File: judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf Graphic file (type pdf)
 <use judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf  used on input line 435.
+Package pdftex.def Info: judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf  used on input line 510.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
 
 
-[20 <./judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf>]
-<judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf, id=366, 452.69125pt x 313.17pt>
-File: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf Graphic file (type pdf)
-<use judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>
-Package pdftex.def Info: judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf  used on input line 447.
-(pdftex.def)             Requested size: 452.69014pt x 313.16922pt.
-
-
-[21 <./judgment_location_article_files/figure-latex/plot-investigation-article-1.pdf>]
+[21]
 
 [22]
 
-[23]
+[23 <./judgment_location_article_files/figure-latex/win-rates-consumer-1.pdf>]
 
-[24] (./judgment_location_article.aux)
+[24]
+
+[25]
+
+[26] (./judgment_location_article.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -688,18 +694,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 13737 strings out of 475539
- 219712 string characters out of 5776149
- 1955957 words of memory out of 5000000
- 36022 multiletter control sequences out of 15000+600000
+ 13742 strings out of 475539
+ 219646 string characters out of 5776149
+ 1958957 words of memory out of 5000000
+ 36025 multiletter control sequences out of 15000+600000
  624490 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  83i,12n,93p,2137b,525s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/stepanpaulik/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on judgment_location_article.pdf (24 pages, 415199 bytes).
+Output written on judgment_location_article.pdf (26 pages, 421725 bytes).
 PDF statistics:
- 568 PDF objects out of 1000 (max. 8388607)
- 491 compressed objects within 5 object streams
- 96 named destinations out of 1000 (max. 500000)
- 135 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 586 PDF objects out of 1000 (max. 8388607)
+ 506 compressed objects within 6 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

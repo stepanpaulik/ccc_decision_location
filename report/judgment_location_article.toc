@@ -5,13 +5,14 @@
 \contentsline {subsubsection}{\numberline {2.2.1}The CCC and its case-law inconsistency}{5}{subsubsection.2.2.1}%
 \contentsline {section}{\numberline {3}Method}{7}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Locating court decisions}{7}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Model selection and specification}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Model selection and specification}{9}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Data}{11}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Data Sources}{11}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}Narrowing the case-space}{12}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Descriptive statistics of the data}{13}{subsubsection.3.3.3}%
 \contentsline {section}{\numberline {4}Results}{14}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Generally binding regulations}{17}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Consumer}{18}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}The Right to Effective Investigation}{21}{subsection.4.3}%
-\contentsline {section}{Conclusion}{22}{section*.2}%
+\contentsline {subsection}{\numberline {4.1}Generally binding regulations}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Consumer}{16}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}The Right to Effective Investigation}{16}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Discussion of results}{20}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion}{23}{section.6}%
